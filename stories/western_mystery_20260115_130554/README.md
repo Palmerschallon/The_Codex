@@ -113,3 +113,37 @@ B) Circle around to higher ground for a better vantage point of the entire area
 C) Search for Jake Morrison's horse or any signs of what happened to him
 D) Set up a temporary camp and observe the light patterns to see if they match the telegraph messages
 
+
+---
+
+**> a**
+
+The horses' hooves sound unnaturally loud on the rocky ground as you dismount and tie them to a stunted juniper fifty yards from the mine entrance. Sarah checks her revolver one more time, the metal cold and reassuring in the thin mountain air.
+
+"Stay low," she whispers, though her voice carries an edge of scientific curiosity that cuts through the fear. "Those lights... they're not behaving like any electrical phenomenon I know."
+
+You approach the sealed mine entrance in a crouch, using abandoned ore carts and rusted equipment as cover. The blue-white radiance grows stronger with each step, pulsing in that same rhythmic pattern - three short flashes, three long, three short again. 
+
+"That's SOS," Sarah breathes beside you. "Someone's calling for help."
+
+But as you draw closer, the truth becomes more unsettling. The mine entrance was sealed with heavy timber and iron bands after the cave-in, yet the light isn't coming from behind the barrier - it's emanating from the wood and metal themselves, as if the very atoms were charged with that strange energy.
+
+Sarah pulls out the crystalline metal fragment she'd found. It begins to glow with the same blue-white light, pulsing in perfect synchronization with the mine entrance. Her eyes widen with sudden understanding.
+
+"It's resonating. Like a tuning fork, but with... something else." She holds the fragment closer to the sealed entrance, and both sources of light flicker faster, more urgently.
+
+That's when you hear it - a low mechanical humming coming from somewhere beneath your feet. Not from inside the sealed mine, but from tunnels that shouldn't exist. The sound is accompanied by a rhythmic tapping that matches the light pulses exactly.
+
+Suddenly, Sarah grabs your arm. "Look."
+
+Twenty feet to your left, partially hidden by a collapsed trestle, you spot something that makes your blood run cold: Jake Morrison's hat, sitting beside what appears to be a freshly carved opening in the rock face - a perfectly round hole about four feet in diameter, descending at a steep angle into absolute darkness.
+
+The mechanical humming grows louder.
+
+**What do you do?**
+
+A) Follow Jake Morrison's trail into the mysterious new tunnel opening
+B) Use Sarah's telegraph knowledge to try communicating with whatever's signaling
+C) Examine the resonating crystal fragment more closely for clues about its properties  
+D) Retreat to a safer distance and create a plan based on what you've observed
+
