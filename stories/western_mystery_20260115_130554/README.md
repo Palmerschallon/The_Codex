@@ -147,3 +147,39 @@ B) Use Sarah's telegraph knowledge to try communicating with whatever's signalin
 C) Examine the resonating crystal fragment more closely for clues about its properties  
 D) Retreat to a safer distance and create a plan based on what you've observed
 
+
+---
+
+**> pause game. its interesting... how can we make it where we are more frequently creating code within a story based world**
+
+You've hit on something really important! Looking at our western mystery so far, we've been heavy on atmospheric storytelling but light on the "code is the story" core concept. Let me think about how we can weave more functional code creation into the narrative flow:
+
+**OPPORTUNITIES WE'VE MISSED:**
+- Sarah's telegraph work - perfect for morse code tools, signal analysis, pattern detection
+- The crystalline fragment - could need spectral analysis, frequency measurement tools  
+- Message decoding - cipher tools, frequency analysis, pattern matching
+- The mysterious signals - audio processing, data logging, communication protocols
+- Investigation tracking - evidence databases, timeline builders, data correlation
+
+**BETTER INTEGRATION STRATEGIES:**
+
+1. **Make characters programmers/engineers** - Sarah could be more than a telegrapher, she could be an inventor/electrical engineer who builds tools
+
+2. **Technology drives plot** - Instead of just finding clues, characters BUILD tools to analyze them, and those tools reveal the next plot point
+
+3. **Code as survival tools** - In a harsh frontier/mystery, the characters need to CREATE solutions to problems
+
+4. **Collaborative problem-solving** - Player and characters work together to build analysis tools
+
+**CONCRETE EXAMPLE:**
+Instead of: "Sarah studies the strange messages"
+Better: "Sarah builds a frequency analyzer to decode the patterns, discovering they contain GPS coordinates from 100 years in the future"
+
+Would you like me to:
+- **A)** Restart this story with more code-heavy integration from the beginning
+- **B)** Continue this story but pivot toward Sarah building analysis tools for the mystery
+- **C)** Try a different genre that naturally requires more coding (cyberpunk, sci-fi, etc.)
+- **D)** Create a framework/template for better code-story integration
+
+What's your instinct on the best path forward?
+
