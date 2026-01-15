@@ -145,3 +145,13 @@ D) Demand to know why Ghost and Elena really came to you—this feels like more 
 **> it says the scan timed out fix please elana and try again**
 
 - `enhanced_probe.py` - 217 lines
+Elena's cybernetic contacts flicker with frustration as error messages cascade across her deck's interface. The holographic display stutters, showing incomplete data streams and timeout warnings.
+
+"Damn corporate legacy infrastructure," she mutters, her fingers flying across the haptic controls. "The probe's hitting some kind of bottleneck—either your system's got deeper defenses than I thought, or there's so much data that my algorithms are choking on it."
+
+Ghost leans over her shoulder, studying the error logs. "Meridian uses quantum throttling on their surveillance grids. Could be adaptive countermeasures."
+
+"No, this is different." Elena's bioluminescent tattoos pulse in rapid patterns as she diagnoses the failure. "The scan's timing out because it's finding too much to process. Like trying to drink from a fire hose of archaeological data."
+
+She cracks her knuckles, a sound like breaking plastic thanks to her subdermal implants. "I need to rebuild the probe with better resource management. Make it smarter, more surgical."
+
