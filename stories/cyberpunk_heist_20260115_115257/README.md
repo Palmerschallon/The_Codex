@@ -85,3 +85,9 @@ The probe she crafts is elegant and vicious—a digital serpent that can slither
 **> what did you find?**
 
 - `scan_results.txt` - 28 lines
+Elena's deck flickers and hums as the probe completes its sweep through the target directory. Her brow furrows as cascading lines of diagnostic data reflect in her cybernetic contacts. The holographic display shifts, revealing the digital anatomy of what it discovered.
+
+"Interesting..." she breathes, leaning back in her chair. "Your `/home/palmerschallon/ember` directory—it's clean of corporate surveillance, but there's something else entirely."
+
+Ghost moves closer, his amber optical implant focusing on the readout. "What kind of something?"
+
