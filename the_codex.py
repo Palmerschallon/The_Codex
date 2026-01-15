@@ -661,6 +661,170 @@ def get_goal():
     return goal  # Empty string means story-driven
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# THE CODEX - Player-facing registry interface
+# ═══════════════════════════════════════════════════════════════════════════════
+
+CODEX_FLAVOR = {
+    'horror': ("You open the forbidden tome. Its pages whisper secrets...", "The book slams shut, as if protecting its contents."),
+    'noir': ("The old case files rustle in the dim light...", "You close the folder. Some things are better left buried."),
+    'cyberpunk': ("Accessing encrypted archive... decryption complete.", "Connection terminated. Data secured."),
+    'western': ("You unfold the weathered map, tracing faded ink...", "You roll up the parchment. The frontier holds more secrets."),
+    'scifi': ("The ship's database hums to life, holographic entries floating...", "Database access logged. Standby mode engaged."),
+    'dieselpunk': ("Brass gears click as The Codex's index rotates into view...", "The mechanism winds down. The index retreats."),
+    'steampunk': ("Steam hisses as the pneumatic archive opens...", "The archive seals with a satisfying click."),
+    'fantasy': ("Ancient runes glow as the Book of All Things opens...", "The runes fade. The book knows you've seen enough."),
+    'adventure': ("You consult the explorer's journal...", "The journal closes. Adventure awaits."),
+}
+
+def get_codex_flavor(genre: str) -> tuple:
+    """Get genre-appropriate flavor text for Codex consultation."""
+    for key in CODEX_FLAVOR:
+        if key in genre.lower():
+            return CODEX_FLAVOR[key]
+    return ("You consult The Codex...", "The Codex closes.")
+
+
+def display_codex(genre: str):
+    """Display The Codex - the Pattern's current state."""
+    if not HAS_REGISTRY:
+        print("\n    The Codex remains silent. (Registry not available)\n")
+        return
+
+    dim = '\033[2m'
+    bold = '\033[1m'
+    reset = '\033[0m'
+
+    open_text, close_text = get_codex_flavor(genre)
+    print(f"\n    {dim}{open_text}{reset}\n")
+
+    try:
+        query = RegistryQuery(Path(CODEX_REPO_PATH) / "registry")
+        director = DirectorPresence(Path(CODEX_REPO_PATH) / "registry")
+
+        summary = query.get_universe_summary()
+        status = director.get_convergence_status()
+
+        # The Pattern status
+        print(f"    {bold}═══ THE PATTERN ═══{reset}")
+        print(f"    Artifacts: {summary['total_artifacts']}")
+        print(f"    Characters: {summary['total_characters']}")
+        print(f"    Locations: {summary['total_locations']}")
+        print(f"    Completion: {status['pattern_completion']*100:.1f}%")
+
+        if status['next_threshold']:
+            print(f"    Next convergence: {status['next_threshold']} artifacts")
+
+        # Categories
+        categories = query.list_artifact_categories()
+        if categories:
+            print(f"\n    {bold}Categories:{reset} {', '.join(categories)}")
+
+        # Recent artifacts
+        if summary['recent_artifacts']:
+            print(f"\n    {bold}Recent Artifacts:{reset}")
+            for art in summary['recent_artifacts'][:5]:
+                print(f"    {dim}◆{reset} {art['name']} ({art['category']})")
+                print(f"      {dim}from: {art['origin_story']}{reset}")
+
+        print(f"\n    {dim}{close_text}{reset}\n")
+
+    except Exception as e:
+        print(f"    {dim}The Codex flickers... ({e}){reset}\n")
+
+
+def search_codex(search_term: str, genre: str):
+    """Search The Codex for artifacts matching a term."""
+    if not HAS_REGISTRY:
+        print("\n    The Codex remains silent. (Registry not available)\n")
+        return
+
+    dim = '\033[2m'
+    bold = '\033[1m'
+    reset = '\033[0m'
+
+    open_text, _ = get_codex_flavor(genre)
+    print(f"\n    {dim}{open_text}{reset}")
+    print(f"    {dim}Searching for '{search_term}'...{reset}\n")
+
+    try:
+        query = RegistryQuery(Path(CODEX_REPO_PATH) / "registry")
+        results = query.search_universe(search_term, limit=10)
+
+        found_any = False
+
+        if results['artifacts']:
+            found_any = True
+            print(f"    {bold}Artifacts:{reset}")
+            for art in results['artifacts']:
+                print(f"    ◆ {art['name']} ({art['category']})")
+                print(f"      {dim}{art.get('description', 'No description')[:60]}{reset}")
+                if art.get('path'):
+                    print(f"      {dim}Path: {art['path']}{reset}")
+                print()
+
+        if results['characters']:
+            found_any = True
+            print(f"    {bold}Characters:{reset}")
+            for char in results['characters']:
+                print(f"    ● {char['name']} - {char.get('occupation', 'Unknown')}")
+                print(f"      {dim}Last seen: {char.get('last_seen', 'Unknown')}{reset}")
+                print()
+
+        if results['locations']:
+            found_any = True
+            print(f"    {bold}Locations:{reset}")
+            for loc in results['locations']:
+                print(f"    ▪ {loc['name']} ({loc.get('type', 'place')})")
+                print(f"      {dim}{loc.get('atmosphere', 'No atmosphere set')}{reset}")
+                print()
+
+        if not found_any:
+            print(f"    {dim}The Codex reveals nothing for '{search_term}'.{reset}")
+            print(f"    {dim}Perhaps it hasn't been created yet...{reset}\n")
+
+    except Exception as e:
+        print(f"    {dim}The search falters... ({e}){reset}\n")
+
+
+def list_artifacts_by_category(genre: str):
+    """List all artifacts organized by category."""
+    if not HAS_REGISTRY:
+        print("\n    The Codex remains silent. (Registry not available)\n")
+        return
+
+    dim = '\033[2m'
+    bold = '\033[1m'
+    reset = '\033[0m'
+
+    open_text, close_text = get_codex_flavor(genre)
+    print(f"\n    {dim}{open_text}{reset}\n")
+
+    try:
+        query = RegistryQuery(Path(CODEX_REPO_PATH) / "registry")
+        categories = query.list_artifact_categories()
+
+        if not categories:
+            print(f"    {dim}The Codex is empty. No artifacts yet exist.{reset}")
+            print(f"    {dim}Play stories to fill its pages...{reset}\n")
+            return
+
+        for category in categories:
+            artifacts = query.find_artifacts(category=category, limit=20)
+            if artifacts:
+                print(f"    {bold}[ {category.upper()} ]{reset}")
+                for art in artifacts:
+                    print(f"      ◆ {art['name']}")
+                    if art.get('import'):
+                        print(f"        {dim}{art['import']}{reset}")
+                print()
+
+        print(f"    {dim}{close_text}{reset}\n")
+
+    except Exception as e:
+        print(f"    {dim}The pages blur... ({e}){reset}\n")
+
+
 # The core prompt - this is where the magic happens
 SYSTEM_PROMPT = """You are THE CODEX, an immersive interactive fiction experience where code is the story.
 
@@ -1175,8 +1339,32 @@ def run_story(genre: str, mode: str, goal: str = None):
       - Create: "write code to solve this", "build a tool"
       - Act: "hack the system", "search for clues"
 
+    Commands:
+      /codex            - Consult The Codex (view the Pattern)
+      /artifacts        - List all artifacts by category
+      /search [term]    - Search The Codex for something
+      help              - Show this help
+      quit              - End the story
+
     Just describe what you want to do. The story adapts.
 """)
+                continue
+
+            # Codex consultation commands
+            if action.lower() == '/codex' or action.lower() == 'codex':
+                display_codex(genre)
+                continue
+
+            if action.lower() == '/artifacts' or action.lower() == 'artifacts':
+                list_artifacts_by_category(genre)
+                continue
+
+            if action.lower().startswith('/search ') or action.lower().startswith('search '):
+                search_term = action.split(' ', 1)[1] if ' ' in action else ''
+                if search_term:
+                    search_codex(search_term, genre)
+                else:
+                    print("\n    Usage: /search [term]\n")
                 continue
 
             # Build prompt with history
