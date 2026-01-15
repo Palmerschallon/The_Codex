@@ -35,3 +35,9 @@ Elena's fingers dance across her deck, and suddenly the room fills with a three-
 **> what is it?**
 
 - `echo_fragment.py` - 124 lines
+Elena's fingers pause over her deck, and the holographic display shifts to reveal a single file icon rotating slowly in the center of the room. The data streams around it pulse faster, as if drawn to whatever secrets it contains.
+
+"This," she says, her voice barely above a whisper. "My contact managed to extract one fragment before Meridian's ice got her. She called it the 'Echo Index'—supposedly a master key that maps every piece of data stored in the Vault."
+
+Ghost moves closer, his cybernetic eye adjusting its focus with mechanical precision. "If it's real, it's worth more than the GDP of most nations. The kind of information that could topple governments... or make us disappear permanently."
+
