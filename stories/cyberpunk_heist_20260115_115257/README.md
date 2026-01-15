@@ -41,3 +41,9 @@ Elena's fingers pause over her deck, and the holographic display shifts to revea
 
 Ghost moves closer, his cybernetic eye adjusting its focus with mechanical precision. "If it's real, it's worth more than the GDP of most nations. The kind of information that could topple governments... or make us disappear permanently."
 
+
+---
+
+**> disappear... how? can we test it in this file vault /home/palmerschallon/ember**
+
+- `vault_probe.py` - 205 lines
