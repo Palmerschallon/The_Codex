@@ -113,3 +113,13 @@ Victoria's detector grows more frantic, its brass dials spinning wildly as you a
 **> pause game. why are you not preesenting options? it is in your prompt**
 
 - `frequency_tracker.py` - 228 lines
+You're absolutely right - I apologize! I must end EVERY response with choices. Let me fix this immediately:
+
+# THE HUNT BEGINS
+
+The brass-fitted doors of the foundry slam open as you and Victoria burst into the coal-scented evening air. She clutches a portable version of her signal analyzer—a briefcase-sized contraption of brass tubes, copper wire antennas, and what appears to be a miniature version of her punch-card processing system.
+
+"This way!" Victoria shouts over the industrial symphony of New Cascadia's evening shift change. Her mechanical arm extends a telescoping antenna as she follows the device's directional indicators. Steam hisses from manholes, and the rhythmic *clank-clank* of pneumatic message tubes echoes between the buildings.
+
+You follow her through the maze of industrial streets, past workers streaming out of factories, their faces blackened with coal dust and machine oil. Overhead, the skeletal framework of transmission towers creates a spider web against the darkening sky, while dirigibles drift between them like sleeping giants.
+
