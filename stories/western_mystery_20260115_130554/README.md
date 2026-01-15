@@ -85,3 +85,31 @@ B) Propose riding out to Blackrock Mine immediately to investigate the source
 C) Ask Sarah about the cave-in and what really happened two years ago
 D) Examine the telegraph equipment itself - something might be generating false signals
 
+
+---
+
+**> b**
+
+The decision crystallizes in your mind like frost on winter glass. "We need to see what's happening at Blackrock. These messages won't decode themselves from here."
+
+Sarah's eyes widen. "At night? The trail to Blackrock is treacherous enough in daylight - all loose shale and hidden crevices. And if something happened to Jake Morrison up there..."
+
+But even as she protests, she's already moving, pulling a heavy coat from a peg behind the counter and checking the loads in an old Colt revolver. "My father always said the best telegraphers don't just read messages - they follow them to their source."
+
+Within minutes, you're both mounted and heading out of Copper Creek under a canopy of brilliant desert stars. Sarah rides her father's sturdy bay mare with the easy confidence of someone raised in the saddle. The rhythmic *clop-clop* of hooves on packed earth mingles with the distant cry of coyotes as the town's flickering lights fade behind you.
+
+The trail winds upward through sagebrush and juniper, following an old mining road carved into the mountainside. Sarah navigates by starlight and instinct, occasionally pausing to check landmarks - a distinctive boulder, a lightning-split pine, the rusted remains of an ore cart.
+
+"The messages started the same night I found this," she says during one such pause, pulling a small object from her saddlebag. In the moonlight, you can see it's a piece of unusual metal - not quite copper, not quite brass, with an almost organic-looking crystalline structure. "It was buried in the telegraph office foundation when I was repairing the floor. My father never mentioned anything like it."
+
+As you crest the final ridge, the abandoned Blackrock Mine spreads below you like a scar on the mountainside. But Sarah was right - there are lights. Not the warm yellow glow of lanterns or campfires, but a cold, blue-white radiance emanating from the sealed mine entrance. The light pulses in regular intervals, like a lighthouse beacon or...
+
+"Like a telegraph signal," Sarah whispers, her voice tight with fear and fascination.
+
+**What do you do?**
+
+A) Approach the mine entrance cautiously on foot to investigate the strange lights
+B) Circle around to higher ground for a better vantage point of the entire area
+C) Search for Jake Morrison's horse or any signs of what happened to him
+D) Set up a temporary camp and observe the light patterns to see if they match the telegraph messages
+
