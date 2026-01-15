@@ -91,3 +91,9 @@ Elena's deck flickers and hums as the probe completes its sweep through the targ
 
 Ghost moves closer, his amber optical implant focusing on the readout. "What kind of something?"
 
+
+---
+
+**> yes what kind of something?**
+
+- `pattern_tracker.py` - 167 lines
