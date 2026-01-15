@@ -1284,6 +1284,23 @@ def process_response(text: str, genre: str = "adventure") -> str:
 
         print(f"    {color}└{'─' * 50}┘{reset}")
 
+        # If there were failures, inject narrative acknowledgment
+        failures = [r for r in execution_results if r[0] in ('timeout', 'error', 'blocked')]
+        if failures:
+            print()
+            failure_narrative = []
+            for ftype, fname, fmsg in failures:
+                if ftype == 'timeout':
+                    failure_narrative.append(f"*The {fname} process stalls, overwhelmed by the data volume...*")
+                elif ftype == 'blocked':
+                    failure_narrative.append(f"*The operation is halted - authorization denied.*")
+                else:
+                    failure_narrative.append(f"*Something goes wrong with {fname}: {fmsg[:50]}...*")
+
+            for line in failure_narrative:
+                print(f"    {dim}{line}{reset}")
+            print()
+
     # Remove execution tags from displayed text
     text = re.sub(exec_pattern, '', text)
     text = re.sub(run_pattern, '', text)
