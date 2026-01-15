@@ -149,3 +149,17 @@ Victoria's detector grows more frantic, its brass dials spinning wildly as you a
 **> The brass-fitted doors of the foundry slam open as you and Victoria burst into the coal-scented evening air. She clutches a portable version of her signal analyzer—a briefcase-sized contraption of brass tubes, copper wire antennas, and what appears to be a miniature version of her punch-card processing system.**
 
 - `frequency_tracker.py` - 323 lines
+# THE PURSUIT THROUGH BRASS AND STEAM
+
+
+
+The brass-fitted doors of the foundry slam open as you and Victoria burst into the coal-scented evening air. She clutches a portable version of her signal analyzer—a briefcase-sized contraption of brass tubes, copper wire antennas, and what appears to be a miniature version of her punch-card processing system.
+
+"The frequency's shifting!" Victoria calls out, her goggles reflecting the amber glow of the street lamps. "They know we're listening!" Her mechanical arm adjusts dials with inhuman precision while her flesh hand grips the device's leather handle.
+
+You sprint through the industrial maze of New Cascadia, past workers emerging from the evening shift change. The air thick with coal smoke and the metallic tang of ozone from the city's electrical grid. Victoria's device emits a steady *tick-tick-tick* that grows more urgent as you weave between pneumatic tube stations and steam-powered delivery trucks.
+
+"This way!" She banks left down Copper Avenue, her analyzer leading you toward the darker industrial sector where the foundries give way to more secretive enterprises. The signal seems to be originating from somewhere near the old Meridian Research Station—that mysterious seven-story edifice crowned with an array of transmission equipment far too advanced for 1934.
+
+Victoria works frantically as you move, connecting additional components to her portable analyzer. She's creating something that can not only track these elusive signals but predict where they'll appear next.
+
