@@ -129,6 +129,98 @@ def start_story_session(genre: str) -> str:
     return session_id
 
 
+def generate_story_title(opening_text: str, genre: str) -> str:
+    """Ask Claude to generate a poetic title for the story."""
+    prompt = f"""Based on this story opening, generate a compelling 2-5 word title.
+
+GENRE: {genre}
+
+OPENING:
+{opening_text[:1000]}
+
+RULES:
+1. The title should be evocative and fit the genre
+2. 2-5 words only
+3. No quotes, colons, or punctuation except hyphens
+4. Make it memorable and unique
+5. Return ONLY the title, nothing else
+
+Examples of good titles:
+- "The Signal In The Dust"
+- "Blood And Clockwork"
+- "Where The Code Remembers"
+- "Echoes Of The Algorithm"
+"""
+    try:
+        title = ask_anthropic_api(prompt, model="claude-sonnet-4-20250514", timeout=30)
+        if title:
+            # Clean up the title
+            title = title.strip().strip('"\'')
+            # Ensure it's reasonable length
+            if 2 <= len(title.split()) <= 7:
+                return title
+    except Exception:
+        pass
+    return None
+
+
+def rename_story_with_title(title: str):
+    """Rename the story directory and update README with the title."""
+    from datetime import datetime
+    import shutil
+
+    if not _current_story_session['path']:
+        return False
+
+    old_path = Path(_current_story_session['path'])
+    if not old_path.exists():
+        return False
+
+    # Create slug from title
+    slug = title.lower().replace(' ', '_').replace('-', '_')
+    slug = ''.join(c for c in slug if c.isalnum() or c == '_')
+
+    # Add timestamp to ensure uniqueness
+    timestamp = datetime.now().strftime("%Y%m%d")
+    new_session_id = f"{slug}_{timestamp}"
+
+    new_path = old_path.parent / new_session_id
+
+    # Handle collision
+    if new_path.exists():
+        counter = 1
+        while new_path.exists():
+            new_path = old_path.parent / f"{new_session_id}_{counter}"
+            counter += 1
+        new_session_id = new_path.name
+
+    # Move the directory
+    try:
+        shutil.move(str(old_path), str(new_path))
+
+        # Update global session state
+        _current_story_session['id'] = new_session_id
+        _current_story_session['path'] = str(new_path)
+
+        # Update README with title
+        readme_path = new_path / "README.md"
+        if readme_path.exists():
+            content = readme_path.read_text()
+            # Replace the first line with the title
+            lines = content.split('\n')
+            lines[0] = f"# {title}"
+            # Update session ID in metadata
+            for i, line in enumerate(lines):
+                if line.startswith('**Session:**'):
+                    lines[i] = f"**Session:** `{new_session_id}`"
+                    break
+            readme_path.write_text('\n'.join(lines))
+
+        return True
+    except Exception:
+        return False
+
+
 def append_to_story(text: str, role: str = "narrator"):
     """Append text to the current story (in README.md for GitHub display)."""
     if not _current_story_session['path']:
@@ -690,6 +782,60 @@ RULES:
     return None
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# THE DIRECTOR - Narrative Error Translation
+# ═══════════════════════════════════════════════════════════════════════════════
+
+DIRECTOR_ERRORS = {
+    'truncated': [
+        "The artifact flickered - incomplete, unstable. Something withdrew before the work was finished.",
+        "The code hung in the air, unfinished. As if its creator had been... interrupted.",
+        "Half-formed. The pattern here is incomplete. Somewhere, the work must continue.",
+    ],
+    'timeout': [
+        "For a moment, the world held its breath. Something vast paused in its calculations.",
+        "Time stretched. The machinery of creation ground slowly, considering...",
+        "The silence stretched. Whoever writes reality was taking their time.",
+    ],
+    'api_error': [
+        "The connection flickered. Something between here and the source of stories... wavered.",
+        "Static. The voice that writes worlds went quiet.",
+        "The signal faded. Somewhere, the Director's attention shifted elsewhere.",
+    ],
+    'file_error': [
+        "The artifact refused to crystallize. This reality rejected its form.",
+        "Some patterns cannot exist here. Not yet. Not in this branch of possibility.",
+        "The file would not take shape. Something about it was wrong - or perhaps too right.",
+    ],
+    'parse_error': [
+        "The code refused to compile. Something in its structure was wrong - or perhaps too right for this reality to contain.",
+        "Syntax error. The language of creation itself stumbled.",
+        "The artifact's structure collapsed. Perhaps its true form cannot exist in this dimension.",
+    ],
+    'missing_dependency': [
+        "The artifact requires components that don't exist yet. Somewhere, in another story, someone needs to create them.",
+        "Dependencies missing. The pieces haven't been built yet - but they will be.",
+        "This code calls to functions that don't exist. Yet.",
+    ],
+}
+
+def narrate_error(error_type: str, technical_message: str = "") -> str:
+    """Translate a technical error into narrative form."""
+    import random
+
+    dim = '\033[2m'
+    reset = '\033[0m'
+
+    phrases = DIRECTOR_ERRORS.get(error_type, DIRECTOR_ERRORS['file_error'])
+    narrative = random.choice(phrases)
+
+    # Include technical details subtly if present
+    if technical_message and len(technical_message) < 100:
+        # Sometimes include coordinates-like fragments
+        return f"\n    {dim}[{narrative}]{reset}\n    {dim}// {technical_message}{reset}\n"
+    return f"\n    {dim}[{narrative}]{reset}\n"
+
+
 def process_response(text: str, genre: str = "adventure") -> str:
     """Process Claude's response - create any files/directories mentioned."""
     import re
@@ -836,9 +982,13 @@ def process_response(text: str, genre: str = "adventure") -> str:
                 _, path = artifact
                 filename = Path(path).name
                 print(f"    {color}│{reset}  ⚠ {filename:<35} {dim}(truncated!){reset} {color}│{reset}")
+                # Show narrative error after the box
+                print(narrate_error('truncated', filename))
             elif artifact[0] == 'error':
                 _, msg = artifact
                 print(f"    {color}│{reset}  ✗ {msg[:45]}")
+                # Show narrative error
+                print(narrate_error('file_error', msg[:50]))
 
         # Git sync and show status
         if files_for_git:
@@ -921,16 +1071,30 @@ def run_story(genre: str, mode: str, goal: str = None):
             history.append(("assistant", story_text))
             # Save to story transcript
             append_to_story(story_text, "narrator")
+
+            # Generate a title for the story
+            print("\n    Naming this tale...")
+            title = generate_story_title(story_text, genre)
+            if title:
+                dim = '\033[2m'
+                reset = '\033[0m'
+                print(f"\n    {dim}\"...{title}\"{reset}")
+                rename_story_with_title(title)
+                # Update the story_path variable for later use
+                story_path = get_story_path()
+
             # Auto-save opening to GitHub
             sync_story_files()
         else:
-            print("\n    Error: No response from Claude. Check ANTHROPIC_API_KEY.")
+            print(narrate_error('api_error'))
+            print("    [Check ANTHROPIC_API_KEY if this persists]")
             return
     except Exception as e:
         stop_thinking.set()
-        print(f"\n    Error starting story: {e}")
-        import traceback
-        traceback.print_exc()
+        if "timeout" in str(e).lower():
+            print(narrate_error('timeout', str(e)[:50]))
+        else:
+            print(narrate_error('api_error', str(e)[:50]))
         return
 
     # Main interaction loop
@@ -1001,11 +1165,14 @@ def run_story(genre: str, mode: str, goal: str = None):
                     # Auto-save checkpoint to GitHub
                     sync_story_files()
                 else:
-                    print("\n    *The story waits...*")
+                    print(narrate_error('api_error'))
                     history.pop()  # Remove failed user message
             except Exception as e:
                 stop_thinking.set()
-                print(f"\n    *The story flickers... ({e})*")
+                if "timeout" in str(e).lower():
+                    print(narrate_error('timeout'))
+                else:
+                    print(narrate_error('api_error', str(e)[:50]))
                 history.pop()  # Remove failed user message
 
         except (KeyboardInterrupt, EOFError):
