@@ -940,6 +940,15 @@ WHEN CREATING THINGS:
 - These tags will be processed and the files will ACTUALLY BE CREATED.
 - Files are automatically synced to GitHub after creation.
 
+WHEN RUNNING/TESTING CODE:
+- To execute a Python file: <execute path="{story_path}/tool.py" args="--target /some/path"></execute>
+- To run inline Python: <run_code>print("Hello from the story!")</run_code>
+- The output will be captured and shown to the player
+- When the player asks to "run", "test", "execute", or "use" a tool, YOU MUST USE THESE TAGS
+- DO NOT just describe running code - ACTUALLY RUN IT with these tags
+- Include real arguments based on what the player specified
+- The code WILL execute on the real filesystem - this is what makes the story real
+
 CRITICAL - CODE PRESENTATION:
 - DO NOT show code inline in the story. The reader sees a notification when files are created.
 - DESCRIBE what the code does in narrative form. "Elena writes a decoder that analyzes frequency patterns..."
@@ -1093,6 +1102,102 @@ def process_response(text: str, genre: str = "adventure") -> str:
     bold = '\033[1m'
 
     artifacts_created = []
+    execution_results = []
+
+    # Process code execution - <execute path="file.py" args="..."></execute>
+    exec_pattern = r'<execute path="([^"]+)"(?:\s+args="([^"]*)")?\s*>(?:</execute>)?'
+    for match in re.finditer(exec_pattern, text, re.DOTALL):
+        file_path = match.group(1).strip()
+        args = match.group(2) or ""
+
+        print(f"\n    {dim}Executing: {Path(file_path).name} {args}{reset}")
+
+        try:
+            import subprocess
+            # Run with timeout for safety
+            cmd = ['python3', file_path] + args.split() if args else ['python3', file_path]
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=30,
+                cwd=str(Path(file_path).parent) if Path(file_path).exists() else None
+            )
+
+            output = result.stdout
+            if result.stderr:
+                output += f"\n{result.stderr}"
+
+            if output.strip():
+                execution_results.append(('success', Path(file_path).name, output.strip()))
+            else:
+                execution_results.append(('success', Path(file_path).name, "(no output)"))
+
+        except subprocess.TimeoutExpired:
+            execution_results.append(('timeout', Path(file_path).name, "Execution timed out (30s limit)"))
+        except FileNotFoundError:
+            execution_results.append(('error', Path(file_path).name, f"File not found: {file_path}"))
+        except Exception as e:
+            execution_results.append(('error', Path(file_path).name, str(e)))
+
+    # Process inline code execution - <run_code>python code here</run_code>
+    run_pattern = r'<run_code>(.*?)</run_code>'
+    for match in re.finditer(run_pattern, text, re.DOTALL):
+        code = match.group(1).strip()
+
+        print(f"\n    {dim}Running inline code...{reset}")
+
+        try:
+            import subprocess
+            result = subprocess.run(
+                ['python3', '-c', code],
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
+
+            output = result.stdout
+            if result.stderr:
+                output += f"\n{result.stderr}"
+
+            if output.strip():
+                execution_results.append(('success', 'inline', output.strip()))
+            else:
+                execution_results.append(('success', 'inline', "(no output)"))
+
+        except subprocess.TimeoutExpired:
+            execution_results.append(('timeout', 'inline', "Execution timed out (30s limit)"))
+        except Exception as e:
+            execution_results.append(('error', 'inline', str(e)))
+
+    # Display execution results
+    if execution_results:
+        print(f"\n    {color}┌{'─' * 50}┐{reset}")
+        print(f"    {color}│{reset} {bold}EXECUTION OUTPUT{reset}{' ' * 33}{color}│{reset}")
+        print(f"    {color}├{'─' * 50}┤{reset}")
+
+        for result_type, name, output in execution_results:
+            if result_type == 'success':
+                print(f"    {color}│{reset}  ▶ {name}")
+            elif result_type == 'timeout':
+                print(f"    {color}│{reset}  ⏱ {name} (timeout)")
+            else:
+                print(f"    {color}│{reset}  ✗ {name} (error)")
+
+            # Show output (truncated if long)
+            for line in output.split('\n')[:15]:
+                if len(line) > 46:
+                    line = line[:43] + "..."
+                print(f"    {color}│{reset}    {dim}{line}{reset}")
+
+            if len(output.split('\n')) > 15:
+                print(f"    {color}│{reset}    {dim}... ({len(output.split(chr(10))) - 15} more lines){reset}")
+
+        print(f"    {color}└{'─' * 50}┘{reset}")
+
+    # Remove execution tags from displayed text
+    text = re.sub(exec_pattern, '', text)
+    text = re.sub(run_pattern, '', text)
 
     # Process directory creation
     dir_pattern = r'<create_directory>(.*?)</create_directory>'
