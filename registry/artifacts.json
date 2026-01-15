@@ -53,6 +53,91 @@
           "changelog": "Initial creation"
         }
       ]
+    },
+    "intercepted_transmission": {
+      "id": "intercepted_transmission",
+      "canonical_name": "Intercepted Transmission",
+      "type": "tool",
+      "category": "general",
+      "tags": [],
+      "description": "",
+      "origin": {
+        "story_id": "western_mystery_20260115_130554",
+        "created_at": "2026-01-15T13:26:12.787268",
+        "created_by_character": null,
+        "narrative_context": "Created during western mystery story"
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/western_mystery_20260115_130554/intercepted_transmission.txt",
+        "entry_point": "InterceptedTransmission",
+        "dependencies": [],
+        "exports": []
+      },
+      "usage": {
+        "import_statement": "from stories.western_mystery_20260115_130554.intercepted_transmission.txt import InterceptedTransmission",
+        "example": "# Use Intercepted Transmission - created in western_mystery_20260115_130554"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "western_mystery_20260115_130554"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T13:26:12.787272",
+          "changelog": "Initial creation"
+        }
+      ]
+    },
+    "telegraph_monitor": {
+      "id": "telegraph_monitor",
+      "canonical_name": "Telegraph Monitor",
+      "type": "tool",
+      "category": "general",
+      "tags": [],
+      "description": "",
+      "origin": {
+        "story_id": "western_mystery_20260115_130554",
+        "created_at": "2026-01-15T13:44:03.045661",
+        "created_by_character": null,
+        "narrative_context": "Created during western mystery story"
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/western_mystery_20260115_130554/iron_horse_investigation/telegraph_monitor.py",
+        "entry_point": "TelegraphMonitor",
+        "dependencies": [],
+        "exports": []
+      },
+      "usage": {
+        "import_statement": "from stories.western_mystery_20260115_130554.telegraph_monitor import TelegraphMonitor",
+        "example": "# Use Telegraph Monitor - created in western_mystery_20260115_130554"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "western_mystery_20260115_130554"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T13:44:03.045664",
+          "changelog": "Initial creation"
+        },
+        {
+          "version": "1.2.0",
+          "date": "2026-01-15T13:46:47.869396",
+          "changelog": "Updated in story western_mystery_20260115_130554"
+        }
+      ]
     }
   }
 }

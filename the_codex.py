@@ -655,6 +655,41 @@ MODE: {mode}
 Begin the story. Create the world. Make it real. Make the code WORK."""
 
 
+def complete_truncated_file(file_path: str, partial_content: str, genre: str) -> str:
+    """Ask Claude to complete a truncated file."""
+    filename = Path(file_path).name
+
+    prompt = f"""A file was being created but got truncated. Complete it.
+
+FILENAME: {filename}
+GENRE CONTEXT: {genre}
+
+PARTIAL CONTENT (complete this, maintaining style and functionality):
+```
+{partial_content}
+```
+
+RULES:
+1. Continue EXACTLY from where it left off
+2. Complete all functions, classes, and logic
+3. The code must be FUNCTIONAL (real tools, not props)
+4. Return ONLY the completed code, no explanation
+5. Start your response with the next character after the truncation"""
+
+    try:
+        completed = ask_anthropic_api(prompt, timeout=60)
+        if completed:
+            # Combine partial + completion
+            full_content = partial_content + "\n" + completed.strip()
+            # Write the file
+            Path(file_path).parent.mkdir(parents=True, exist_ok=True)
+            Path(file_path).write_text(full_content)
+            return full_content
+    except Exception:
+        pass
+    return None
+
+
 def process_response(text: str, genre: str = "adventure") -> str:
     """Process Claude's response - create any files/directories mentioned."""
     import re
@@ -751,9 +786,20 @@ def process_response(text: str, genre: str = "adventure") -> str:
             artifacts_created.append(('error', f"Could not create {file_path}: {e}"))
 
     # Handle truncated files (opening tag but no closing tag)
-    truncated_pattern = r'<create_file path="([^"]+)">(?!.*</create_file>)'
+    truncated_pattern = r'<create_file path="([^"]+)">((?!.*</create_file>).*)$'
     for match in re.finditer(truncated_pattern, text, re.DOTALL):
         file_path = match.group(1).strip()
+        partial_content = match.group(2).strip() if match.group(2) else ""
+
+        # Try to auto-complete truncated files
+        if partial_content and len(partial_content) > 50:
+            print(f"\n    Completing truncated file: {Path(file_path).name}...")
+            completed = complete_truncated_file(file_path, partial_content, genre)
+            if completed:
+                line_count = len(completed.split('\n'))
+                artifacts_created.append(('file', file_path, line_count))
+                continue
+
         artifacts_created.append(('truncated', file_path))
 
     # Remove the tags from displayed text
