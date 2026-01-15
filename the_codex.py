@@ -41,8 +41,18 @@ def ask_anthropic_api(prompt: str, model: str = "claude-sonnet-4-20250514", time
         return None
 
     api_key = os.environ.get("ANTHROPIC_API_KEY")
+
+    # Fallback: try to read from .env file
     if not api_key:
-        print("Error: ANTHROPIC_API_KEY environment variable not set")
+        env_file = Path(__file__).parent / ".env"
+        if env_file.exists():
+            for line in env_file.read_text().split('\n'):
+                if line.startswith('ANTHROPIC_API_KEY='):
+                    api_key = line.split('=', 1)[1].strip().strip("'\"")
+                    break
+
+    if not api_key:
+        print("Error: ANTHROPIC_API_KEY not found. Set env var or create .env file.")
         return None
 
     try:
