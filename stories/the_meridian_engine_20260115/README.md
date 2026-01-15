@@ -37,3 +37,31 @@ The brass analyzer hums with electric tension as Victoria's mechanical fingers p
 
 The signal interceptor she's built chirps and clicks, punch cards feeding through its mechanical brain. Victoria has created something remarkable—a device that doesn't just capture radio frequencies, but analyzes their patterns, looking for the mathematical signatures that betray encrypted communications.
 
+
+---
+
+**> radio frequencies again? there seems to be a pattern. remember you need to offer me options to proceed with the story**
+
+# THE BRASS CONVERGENCE DEEPENS
+
+You notice Victoria's expression shift as she studies the readouts from her analyzer. The foundry's diesel engines seem to pulse in rhythm with the blinking lights on her device, creating an almost hypnotic atmosphere thick with coal smoke and possibility.
+
+"You're right, Ray," she says, her mechanical arm whirring as it adjusts dials with impossible precision. "There *is* a pattern. But it's not just in the radio frequencies—it's in everything. The missing engineers, the factory sabotages, even the timing of the airship schedules above us."
+
+She gestures toward a large brass-plated board mounted on the foundry wall, covered in photographs, newspaper clippings, and colored string connecting various points across a map of New Cascadia. Red pins mark the locations of disappeared engineers, while black pins show sabotaged facilities.
+
+"Look at this constellation of incidents," Victoria continues, her voice dropping to a conspiratorial whisper. "Someone—or some organization—is systematically targeting specific industrial capabilities. They're not random attacks. They're surgical strikes designed to cripple particular types of manufacturing."
+
+Through the foundry's tall windows, you can see the city's skyline: massive cooling towers releasing steam into the twilight, transmission towers bristling with electrical connections, and the occasional dirigible drifting between the industrial spires like a whale navigating coral reefs.
+
+Suddenly, Victoria's signal analyzer erupts in a cascade of clicking sounds. Her eyes widen behind her brass goggles.
+
+"Ray... they're transmitting *right now*. And the signal is coming from inside the city. Close. Very close."
+
+**What do you do?**
+
+A) Rush outside to triangulate the transmission source using Victoria's portable signal detector
+B) Study the pattern board more carefully to identify what type of facility might be the next target
+C) Ask Victoria about the specific engineers who've disappeared—there might be a connection she's missed
+D) Suggest investigating the foundry itself—what if the signal is coming from inside this very building?
+
