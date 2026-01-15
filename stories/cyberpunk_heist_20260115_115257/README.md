@@ -179,3 +179,31 @@ Ghost nods, his amber eye adjusting focus. "Surgical strikes, not carpet bombing
 - `targeted_probe.py` - 175 lines
 Elena's rebuilt probe launches with surgical precision, her deck humming with focused intent. The holographic display shifts to show a more elegant approach—data streams flowing in controlled patterns rather than the chaotic flood of her first attempt.
 
+
+---
+
+**> run it**
+
+The room fills with electric tension as Elena's targeted probe pierces through the digital archaeology site. Her deck's cooling fans spin faster, processing the massive data streams that flow back from your ember directory.
+
+Ghost leans forward, his cybernetic eye tracking the cascade of information. "What are you seeing?"
+
+Elena's face illuminates with the glow of discovery, but also something that might be fear. The probe's results paint a picture none of them expected—your ember directory isn't just large, it's *organized*. Structured. As if someone has been carefully curating digital artifacts for decades.
+
+"Kira," she whispers, her voice carrying a new edge of respect and wariness. "You're not just a data archaeologist. You're sitting on the largest collection of pre-corporate war code fragments outside of Meridian Corp itself."
+
+The holographic display shows clusters of related files, connection patterns that span decades, and signature matches that trace back to the legendary hackers of the old net. But there's something else—gaps in the data that suggest missing pieces, like archaeological sites where the most valuable artifacts have been carefully removed.
+
+"Someone's been using your collection as a research database," Elena continues, her fingers dancing across new scanning protocols. "But they've been selective. Taking only specific fragments that match a particular pattern."
+
+Ghost's expression darkens. "The same pattern the Vault of Echoes is built on."
+
+Outside, the neon rain intensifies, and somewhere in the distance, a security siren wails through the night.
+
+**What do you do?**
+
+A) Investigate the gaps in your ember collection—what was taken and by whom?
+B) Cross-reference the pattern matches against Elena's Meridian Corp intelligence
+C) Ask Elena to explain exactly how someone could have been accessing your system
+D) Propose using your ember collection as bait to draw out whoever has been mining it
+
