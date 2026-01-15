@@ -1,0 +1,28 @@
+DEEP SCAN RESULTS - /home/palmerschallon/ember
+==============================================
+
+Directory Structure Analysis:
+- 14 subdirectories detected
+- 89 total files analyzed
+- Deepest nesting: 4 levels
+
+Anomaly Detection:
+[WARNING] Large files detected:
+- ./target/debug/ember: 15,234,728 bytes
+- ./target/debug/deps/libember-*.rlib: Multiple large library files
+
+[INFO] Development artifacts found:
+- Rust project structure (Cargo.toml detected)
+- Build artifacts in ./target/ directory
+- Source code primarily in ./src/
+
+[ALERT] Encrypted/Binary content:
+- Multiple .rlib files contain compiled code
+- Debug symbols present
+- No obvious surveillance markers
+
+Security Assessment: CLEAN
+Corporate Fingerprints: NONE DETECTED
+Threat Level: MINIMAL
+
+Notable: This appears to be a Rust development project called "ember" - clean development environment with no signs of corporate infiltration or surveillance backdoors.

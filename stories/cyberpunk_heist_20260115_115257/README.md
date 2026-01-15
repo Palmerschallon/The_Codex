@@ -79,3 +79,9 @@ Elena's fingers freeze over the interface as you specify the target. Her cyberne
 
 The probe she crafts is elegant and vicious—a digital serpent that can slither through file systems, detecting anomalies, surveillance backdoors, and the subtle fingerprints that corporate security leaves behind.
 
+
+---
+
+**> what did you find?**
+
+- `scan_results.txt` - 28 lines
