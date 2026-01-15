@@ -321,8 +321,9 @@ def stream_text(text, line_delay=0.03, char_delay=0.008):
 
 
 def thinking_indicator(stop_event, genre="adventure"):
-    """Show atmospheric text and progress bar while waiting."""
+    """Show atmospheric text while waiting for API response."""
     import random
+    import sys
 
     # Genre-specific styles and phrases
     genre_configs = {
@@ -442,42 +443,18 @@ def thinking_indicator(stop_event, genre="adventure"):
     reset = '\033[0m'
     dim = '\033[2m'
 
-    bar_width = 20
-    position = 0
-    direction = 1
-    phrase_index = 0
-    cycles = 0
+    # Simple static indicator - no animation to avoid terminal compatibility issues
+    phrase = random.choice(phrases)
+    sys.stdout.write(f'\r    {dim}{phrase}{reset}')
+    sys.stdout.flush()
 
+    # Just wait for stop signal
     while not stop_event.is_set():
-        # Build the bar
-        bar = ""
-        for i in range(bar_width):
-            if i == position:
-                bar += filled
-            elif i == position - 1 or i == position + 1:
-                bar += filled
-            else:
-                bar += empty
+        time.sleep(0.1)
 
-        # Single line animation - use carriage return only
-        current_phrase = phrases[phrase_index]
-        print(f'\r    {dim}{current_phrase:<35}{reset} {color}[{bar}]{reset}', end='', flush=True)
-
-        position += direction
-        if position >= bar_width - 1:
-            direction = -1
-        elif position <= 0:
-            direction = 1
-            cycles += 1
-            # Change phrase every 2 cycles
-            if cycles % 2 == 0:
-                phrase_index = (phrase_index + 1) % len(phrases)
-
-        time.sleep(0.08)
-
-    # Clear the line and move to next
-    print(f'\r{" " * 70}\r', end='', flush=True)
-    print()
+    # Clear the line completely using ANSI escape
+    sys.stdout.write('\033[2K\r')
+    sys.stdout.flush()
 
 
 def opening():
@@ -635,6 +612,18 @@ STORY STRUCTURE:
 - Tension and mystery that builds
 - FUNCTIONAL code that emerges naturally from story needs
 - Player choices that matter
+
+CHOICES - CRITICAL:
+At the end of EVERY response, present 3-4 clear choices for the player:
+
+**What do you do?**
+  A) [First option - action-oriented]
+  B) [Second option - investigative/cautious]
+  C) [Third option - social/dialogue]
+  D) [Fourth option - creative/unexpected]
+
+The player can type anything, but these choices help guide the story.
+Make options distinct and meaningful - each should lead somewhere different.
 
 GENRE: {genre}
 MODE: {mode}
