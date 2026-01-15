@@ -111,3 +111,31 @@ Ghost's cybernetic eye whirs as it focuses. "You're saying Kira's system is conn
 
 The room falls silent except for the hum of ancient servers. In the distance, a corporate security drone's searchlight sweeps across the smart-glass windows, its beam cutting through the electric rain.
 
+
+---
+
+**> try and actually run it again on /ember im curious what you will find**
+
+Elena's contacts flicker with renewed intensity as she processes your request. The revelation about the Pattern has left her visibly shaken, but your curiosity seems to spark something deeper—a hunger for truth that mirrors her own obsession with digital archaeology.
+
+"You want to probe deeper," she says, her voice carrying a mix of respect and concern. "The first scan was surface-level reconnaissance. But if there really are Pattern fragments in your system..." She pauses, her fingers already dancing across the deck's interface. "This time I'm going full spectrum. Deep file analysis, metadata archaeology, quantum signature detection."
+
+Ghost steps back from the holographic display, his military instincts clearly on edge. "Elena, if Meridian has quantum entanglement protocols in their surveillance grid, a deep scan could—"
+
+"Could trigger their hunters," she finishes. "I know. But if Kira's system really contains echo fragments from the Vault, we need to understand what we're dealing with before we make our move."
+
+The probe she constructs this time is far more aggressive—a digital predator designed to tear apart file systems at the molecular level and reconstruct their hidden histories. Her bioluminescent tattoos pulse in rapid cascades as she weaves together quantum analysis algorithms and temporal signature detection protocols.
+
+
+
+The room fills with the electric hum of processing power as Elena's enhanced probe tears through your directory structure like a digital archaeologist excavating layers of forgotten civilization. Data streams cascade across every surface, painting the abandoned server room in shifting patterns of blue and green light.
+
+"Mother of code..." Elena breathes, her eyes wide as the results flood in. "Kira, what exactly have you been collecting in there?"
+
+**What do you do?**
+
+A) Examine the deep scan results immediately to understand what's hidden in your system
+B) Ask Elena to explain what the "Pattern" really is and why it's so dangerous
+C) Suggest you all leave immediately—this level of scanning might have attracted attention
+D) Demand to know why Ghost and Elena really came to you—this feels like more than coincidence
+
