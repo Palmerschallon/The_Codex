@@ -306,3 +306,9 @@ B) Follow Ezra Blackwood as he investigates the locomotive's engine systems
 C) Track those mysterious telegraph lines leading into the desert
 D) Question the other passengers about their destinations and cargo
 
+
+---
+
+**> lets follow the telegraph lines**
+
+- `telegraph_monitor.py` - 199 lines
