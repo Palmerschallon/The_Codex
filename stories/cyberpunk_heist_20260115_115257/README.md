@@ -47,3 +47,13 @@ Ghost moves closer, his cybernetic eye adjusting its focus with mechanical preci
 **> disappear... how? can we test it in this file vault /home/palmerschallon/ember**
 
 - `vault_probe.py` - 205 lines
+Elena's expression darkens at your question. Her fingers hover over the deck's interface, and she exchanges a meaningful glance with Ghost.
+
+"Meridian doesn't just kill people who cross them," she says quietly. "They erase them. Completely. Social security records, birth certificates, medical histories—every digital trace that proves you ever existed gets scrubbed from every database on the planet."
+
+Ghost nods grimly. "I've seen it happen. Corporate dissidents who one day just... weren't. Their families forget them. Their friends can't remember their names. The only thing left is empty spaces where a life used to be."
+
+Elena's deck chirps softly, and she pulls up another display—this one showing cascading deletion protocols and memory modification algorithms. "But you're right to want to test things. If we're going after the Vault, we need to know exactly what we're dealing with."
+
+She begins typing rapidly, her bioluminescent tattoos flaring brighter. "I'm writing a probe—something that can scan file systems and detect traces of corporate surveillance malware. If Meridian's watchers have infiltrated your suggested location, we'll know."
+
