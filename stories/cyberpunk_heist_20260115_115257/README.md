@@ -73,3 +73,9 @@ Elena's fingers fly across her deck's haptic interface, code cascading down her 
 **> do it**
 
 - `vault_probe.py` - 266 lines
+Elena's fingers freeze over the interface as you specify the target. Her cybernetic contacts flicker with data streams as she initiates the scan protocol.
+
+"Running deep reconnaissance on `/home/palmerschallon/ember`..." she whispers, her voice taking on the rhythmic cadence of someone lost in the flow of pure data.
+
+The probe she crafts is elegant and vicious—a digital serpent that can slither through file systems, detecting anomalies, surveillance backdoors, and the subtle fingerprints that corporate security leaves behind.
+
