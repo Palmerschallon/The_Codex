@@ -1,13 +1,13 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-01-15T13:46:47.869588",
+  "last_updated": "2026-01-15T14:52:29.006624",
   "universe_name": "The Codex",
   "description": "A shared universe where stories create real code artifacts",
   "stats": {
-    "total_artifacts": 3,
+    "total_artifacts": 10,
     "total_characters": 2,
     "total_locations": 1,
-    "total_stories": 4
+    "total_stories": 7
   },
   "registries": {
     "artifacts": "registry/artifacts.json",

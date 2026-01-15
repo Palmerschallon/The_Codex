@@ -11,6 +11,24 @@
           "sequence": 1,
           "era": "present",
           "added_at": "2026-01-15T09:11:50.704570"
+        },
+        {
+          "story_id": "horror_noir_20260115_141109",
+          "sequence": 2,
+          "era": "present",
+          "added_at": "2026-01-15T14:11:09.700708"
+        },
+        {
+          "story_id": "mystery_20260115_141227",
+          "sequence": 3,
+          "era": "present",
+          "added_at": "2026-01-15T14:12:27.260740"
+        },
+        {
+          "story_id": "dieselpunk_adventure_20260115_141324",
+          "sequence": 4,
+          "era": "present",
+          "added_at": "2026-01-15T14:13:24.369352"
         }
       ]
     }

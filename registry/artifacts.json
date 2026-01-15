@@ -138,6 +138,306 @@
           "changelog": "Updated in story western_mystery_20260115_130554"
         }
       ]
+    },
+    "signal_interceptor": {
+      "id": "signal_interceptor",
+      "canonical_name": "Signal Interceptor",
+      "type": "tool",
+      "category": "general",
+      "tags": [],
+      "description": "",
+      "origin": {
+        "story_id": "dieselpunk_adventure_20260115_141324",
+        "created_at": "2026-01-15T14:14:29.572237",
+        "created_by_character": null,
+        "narrative_context": "Created during dieselpunk adventure story"
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/dieselpunk_adventure_20260115_141324/signal_interceptor.py",
+        "entry_point": "SignalInterceptor",
+        "dependencies": [],
+        "exports": []
+      },
+      "usage": {
+        "import_statement": "from stories.dieselpunk_adventure_20260115_141324.signal_interceptor import SignalInterceptor",
+        "example": "# Use Signal Interceptor - created in dieselpunk_adventure_20260115_141324"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "dieselpunk_adventure_20260115_141324"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T14:14:29.572241",
+          "changelog": "Initial creation"
+        }
+      ]
+    },
+    "signal_analysis_results": {
+      "id": "signal_analysis_results",
+      "canonical_name": "Signal Analysis Results",
+      "type": "tool",
+      "category": "general",
+      "tags": [],
+      "description": "",
+      "origin": {
+        "story_id": "the_meridian_engine_20260115",
+        "created_at": "2026-01-15T14:30:07.399281",
+        "created_by_character": null,
+        "narrative_context": "Created during dieselpunk adventure story"
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/the_meridian_engine_20260115/signal_analysis_results.txt",
+        "entry_point": "SignalAnalysisResults",
+        "dependencies": [],
+        "exports": []
+      },
+      "usage": {
+        "import_statement": "from stories.the_meridian_engine_20260115.signal_analysis_results.txt import SignalAnalysisResults",
+        "example": "# Use Signal Analysis Results - created in the_meridian_engine_20260115"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "the_meridian_engine_20260115"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T14:30:07.399287",
+          "changelog": "Initial creation"
+        }
+      ]
+    },
+    "signal_triangulator": {
+      "id": "signal_triangulator",
+      "canonical_name": "Signal Triangulator",
+      "type": "tool",
+      "category": "general",
+      "tags": [],
+      "description": "",
+      "origin": {
+        "story_id": "the_meridian_engine_20260115",
+        "created_at": "2026-01-15T14:35:53.019059",
+        "created_by_character": null,
+        "narrative_context": "Created during dieselpunk adventure story"
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/the_meridian_engine_20260115/signal_triangulator.py",
+        "entry_point": "SignalTriangulator",
+        "dependencies": [],
+        "exports": []
+      },
+      "usage": {
+        "import_statement": "from stories.the_meridian_engine_20260115.signal_triangulator import SignalTriangulator",
+        "example": "# Use Signal Triangulator - created in the_meridian_engine_20260115"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "the_meridian_engine_20260115"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T14:35:53.019066",
+          "changelog": "Initial creation"
+        }
+      ]
+    },
+    "location_tracker": {
+      "id": "location_tracker",
+      "canonical_name": "Location Tracker",
+      "type": "tool",
+      "category": "general",
+      "tags": [],
+      "description": "",
+      "origin": {
+        "story_id": "the_meridian_engine_20260115",
+        "created_at": "2026-01-15T14:40:28.940861",
+        "created_by_character": null,
+        "narrative_context": "Created during dieselpunk adventure story"
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/the_meridian_engine_20260115/surveillance_tools/location_tracker.py",
+        "entry_point": "LocationTracker",
+        "dependencies": [],
+        "exports": []
+      },
+      "usage": {
+        "import_statement": "from stories.the_meridian_engine_20260115.surveillance_tools.location_tracker import LocationTracker",
+        "example": "# Use Location Tracker - created in the_meridian_engine_20260115"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "the_meridian_engine_20260115"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T14:40:28.940864",
+          "changelog": "Initial creation"
+        }
+      ]
+    },
+    "frequency_tracker": {
+      "id": "frequency_tracker",
+      "canonical_name": "Frequency Tracker",
+      "type": "tool",
+      "category": "general",
+      "tags": [],
+      "description": "",
+      "origin": {
+        "story_id": "the_meridian_engine_20260115",
+        "created_at": "2026-01-15T14:42:38.153388",
+        "created_by_character": null,
+        "narrative_context": "Created during dieselpunk adventure story"
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/the_meridian_engine_20260115/tracking/frequency_tracker.py",
+        "entry_point": "FrequencyTracker",
+        "dependencies": [],
+        "exports": []
+      },
+      "usage": {
+        "import_statement": "from stories.the_meridian_engine_20260115.frequency_tracker import FrequencyTracker",
+        "example": "# Use Frequency Tracker - created in the_meridian_engine_20260115"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "the_meridian_engine_20260115"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T14:42:38.153390",
+          "changelog": "Initial creation"
+        },
+        {
+          "version": "1.2.0",
+          "date": "2026-01-15T14:45:16.320750",
+          "changelog": "Updated in story the_meridian_engine_20260115"
+        }
+      ]
+    },
+    "signal_tracker": {
+      "id": "signal_tracker",
+      "canonical_name": "Signal Tracker",
+      "type": "tool",
+      "category": "general",
+      "tags": [],
+      "description": "",
+      "origin": {
+        "story_id": "the_meridian_engine_20260115",
+        "created_at": "2026-01-15T14:44:06.535726",
+        "created_by_character": null,
+        "narrative_context": "Created during dieselpunk adventure story"
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/the_meridian_engine_20260115/signal_tracker.py",
+        "entry_point": "SignalTracker",
+        "dependencies": [],
+        "exports": []
+      },
+      "usage": {
+        "import_statement": "from stories.the_meridian_engine_20260115.signal_tracker import SignalTracker",
+        "example": "# Use Signal Tracker - created in the_meridian_engine_20260115"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "the_meridian_engine_20260115"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T14:44:06.535734",
+          "changelog": "Initial creation"
+        }
+      ]
+    },
+    "network_mapper": {
+      "id": "network_mapper",
+      "canonical_name": "Network Mapper",
+      "type": "tool",
+      "category": "network",
+      "tags": [],
+      "description": "",
+      "origin": {
+        "story_id": "the_meridian_engine_20260115",
+        "created_at": "2026-01-15T14:46:09.372735",
+        "created_by_character": null,
+        "narrative_context": "Created during dieselpunk adventure story"
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/the_meridian_engine_20260115/network_mapper.py",
+        "entry_point": "NetworkMapper",
+        "dependencies": [],
+        "exports": []
+      },
+      "usage": {
+        "import_statement": "from stories.the_meridian_engine_20260115.network_mapper import NetworkMapper",
+        "example": "# Use Network Mapper - created in the_meridian_engine_20260115"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "the_meridian_engine_20260115"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T14:46:09.372737",
+          "changelog": "Initial creation"
+        },
+        {
+          "version": "1.2.0",
+          "date": "2026-01-15T14:47:07.969530",
+          "changelog": "Updated in story the_meridian_engine_20260115"
+        },
+        {
+          "version": "1.3.0",
+          "date": "2026-01-15T14:48:24.812784",
+          "changelog": "Updated in story the_meridian_engine_20260115"
+        },
+        {
+          "version": "1.4.0",
+          "date": "2026-01-15T14:52:29.006293",
+          "changelog": "Updated in story the_meridian_engine_20260115"
+        }
+      ]
     }
   }
 }
