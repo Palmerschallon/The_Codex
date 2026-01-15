@@ -67,3 +67,9 @@ Elena's fingers fly across her deck's haptic interface, code cascading down her 
 
 "This will scan your test directory for any traces of Meridian's fingerprints," she murmurs, her voice taking on the focused intensity of a surgeon. "Hidden files, unusual permissions, network callbacks... anything that shouldn't be there."
 
+
+---
+
+**> do it**
+
+- `vault_probe.py` - 266 lines
