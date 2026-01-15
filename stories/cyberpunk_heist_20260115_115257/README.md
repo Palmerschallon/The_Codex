@@ -155,3 +155,9 @@ Ghost leans over her shoulder, studying the error logs. "Meridian uses quantum t
 
 She cracks her knuckles, a sound like breaking plastic thanks to her subdermal implants. "I need to rebuild the probe with better resource management. Make it smarter, more surgical."
 
+
+---
+
+**> /ember is really large maybe you need a more targeted approach**
+
+- `archaeological_mapper.py` - 226 lines
