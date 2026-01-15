@@ -139,3 +139,9 @@ B) Ask Elena to explain what the "Pattern" really is and why it's so dangerous
 C) Suggest you all leave immediately—this level of scanning might have attracted attention
 D) Demand to know why Ghost and Elena really came to you—this feels like more than coincidence
 
+
+---
+
+**> it says the scan timed out fix please elana and try again**
+
+- `enhanced_probe.py` - 217 lines
