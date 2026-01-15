@@ -393,12 +393,70 @@ def opening():
     time.sleep(0.5)
 
 
+def list_stories():
+    """List available stories to continue."""
+    stories_path = Path(CODEX_REPO_PATH) / "stories"
+    if not stories_path.exists():
+        return []
+
+    stories = []
+    for d in sorted(stories_path.iterdir(), key=lambda x: x.stat().st_mtime, reverse=True):
+        if d.is_dir():
+            readme = d / "README.md"
+            if readme.exists():
+                # Extract genre from first line
+                try:
+                    first_line = readme.read_text().split('\n')[0]
+                    genre = first_line.replace('#', '').strip()
+                except:
+                    genre = d.name
+                stories.append({
+                    'id': d.name,
+                    'path': str(d),
+                    'genre': genre,
+                    'modified': d.stat().st_mtime
+                })
+    return stories
+
+
+def load_story(story_id: str):
+    """Load a story for continuation."""
+    story_path = Path(CODEX_REPO_PATH) / "stories" / story_id
+    readme = story_path / "README.md"
+
+    if not readme.exists():
+        return None, None
+
+    content = readme.read_text()
+
+    # Extract genre from metadata
+    genre = "adventure"
+    for line in content.split('\n'):
+        if line.startswith('**Genre:**'):
+            genre = line.replace('**Genre:**', '').strip()
+            break
+
+    # Set up the session state
+    _current_story_session['id'] = story_id
+    _current_story_session['genre'] = genre
+    _current_story_session['path'] = str(story_path)
+    _current_story_session['artifacts'] = []
+
+    return content, genre
+
+
 def get_mode():
     """Get the mode from user."""
+    # Check for existing stories
+    stories = list_stories()
+    has_stories = len(stories) > 0
+
     print("        ┌─────────────────────────────────────────────┐")
     print("        │                                             │")
-    print("        │   [1] BUILD   - I know what I want to make  │")
-    print("        │   [2] STORY   - I want to explore           │")
+    print("        │   [1] BUILD    - I know what I want to make │")
+    print("        │   [2] STORY    - Start a new story          │")
+    if has_stories:
+        print("        │   [3] CONTINUE - Resume a saved story      │")
     print("        │                                             │")
     print("        └─────────────────────────────────────────────┘")
     print()
@@ -415,10 +473,13 @@ def get_mode():
         elif choice in ['2', 'story']:
             print("        [Mode: STORY]")
             return 'story'
+        elif choice in ['3', 'continue', 'c'] and has_stories:
+            return 'continue'
         elif choice in ['q', 'quit', 'exit']:
             return None
         else:
-            print(f"        (Got: '{choice}') - Type 1 or 2")
+            options = "1, 2, or 3" if has_stories else "1 or 2"
+            print(f"        Type {options}")
 
 
 def get_genre():
@@ -437,6 +498,53 @@ def get_genre():
         print(f"        *The pages settle on: {choice}*")
 
     return choice
+
+
+def select_story():
+    """Let user select a story to continue."""
+    from datetime import datetime
+
+    stories = list_stories()
+    if not stories:
+        print("        No saved stories found.")
+        return None
+
+    print()
+    print("        ┌─────────────────────────────────────────────┐")
+    print("        │           SAVED STORIES                     │")
+    print("        ├─────────────────────────────────────────────┤")
+
+    for i, story in enumerate(stories[:9], 1):  # Max 9 stories
+        genre = story['genre'][:25]
+        # Format timestamp
+        mtime = datetime.fromtimestamp(story['modified'])
+        time_str = mtime.strftime("%m/%d %H:%M")
+        print(f"        │   [{i}] {genre:<25} {time_str}  │")
+
+    print("        │                                             │")
+    print("        │   [0] Back                                  │")
+    print("        └─────────────────────────────────────────────┘")
+    print()
+
+    while True:
+        try:
+            choice = input("        > ").strip()
+        except EOFError:
+            return None
+
+        if choice == '0' or choice.lower() == 'back':
+            return None
+
+        try:
+            idx = int(choice) - 1
+            if 0 <= idx < len(stories):
+                selected = stories[idx]
+                print(f"        Loading: {selected['genre']}...")
+                return selected['id']
+        except ValueError:
+            pass
+
+        print("        Enter a number from the list")
 
 
 def get_goal():
@@ -851,6 +959,117 @@ def run_story(genre: str, mode: str, goal: str = None):
             break
 
 
+def continue_story(story_id: str, genre: str, story_content: str):
+    """Continue a previously saved story."""
+    import threading
+
+    if not HAS_LLM:
+        print("\n    Cannot continue story without LLM access.\n")
+        return
+
+    # Get story path
+    story_path = get_story_path()
+
+    print(f"\n    Continuing: {story_id}")
+    print(f"    Artifacts: github.com/Palmerschallon/The_Codex/stories/{story_id}")
+    print("\n" + "="*60)
+
+    # Build system prompt
+    goal_line = "GOAL: Continue the story from where it left off"
+    system = SYSTEM_PROMPT.format(
+        genre=genre,
+        mode='story',
+        goal_line=goal_line,
+        story_path=story_path
+    )
+
+    # Add universe context if registry available
+    if HAS_REGISTRY:
+        try:
+            query = RegistryQuery(Path(CODEX_REPO_PATH) / "registry")
+            universe_context = query.build_prompt_context(genre=genre, max_items=5)
+            if universe_context:
+                system = system + "\n\n" + universe_context
+        except Exception:
+            pass
+
+    # Build history from story content (summarized for context)
+    # We'll give Claude the story so far and ask it to continue
+    history = []
+
+    print("\n    *The pages flutter open to where you left off...*\n")
+    print("-"*60)
+    print("    Type anything to interact. 'quit' to end.")
+    print("-"*60)
+
+    # Main interaction loop
+    while True:
+        try:
+            print()
+            action = input("> ").strip()
+
+            if not action:
+                continue
+
+            if action.lower() in ['quit', 'exit', 'q']:
+                print("\n    *The book closes. The code remains.*\n")
+                break
+
+            # Build prompt with story context
+            history.append(("user", action))
+            append_to_story(action, "player")
+
+            # Include story content as context
+            context_prompt = f"""STORY SO FAR (this is the saved story - continue from here):
+
+{story_content[-8000:]}
+
+---
+The player has returned and wants to continue. Their action:
+{action}
+
+Continue the story naturally from where it left off. Remember to end with choices (A, B, C, D)."""
+
+            conv_parts = [system, "", context_prompt]
+            for role, msg in history[-5:]:  # Recent history
+                if role == "user":
+                    conv_parts.append(f"User: {msg}")
+                else:
+                    conv_parts.append(f"Assistant: {msg}")
+
+            full_prompt = "\n\n".join(conv_parts)
+
+            try:
+                stop_thinking = threading.Event()
+                thinking_thread = threading.Thread(target=thinking_indicator, args=(stop_thinking, genre))
+                thinking_thread.start()
+
+                story_text = ask_anthropic_api(full_prompt, model="claude-sonnet-4-20250514", timeout=120)
+
+                stop_thinking.set()
+                thinking_thread.join()
+
+                if story_text:
+                    story_text = process_response(story_text, genre)
+                    print()
+                    stream_text(story_text)
+                    history.append(("assistant", story_text))
+                    append_to_story(story_text, "narrator")
+                    sync_story_files()
+                else:
+                    print("\n    *The story waits...*")
+                    history.pop()
+            except Exception as e:
+                stop_thinking.set()
+                print(f"\n    *The story flickers... ({e})*")
+                history.pop()
+
+        except (KeyboardInterrupt, EOFError):
+            print("\n\n    *The story pauses...*\n")
+            sync_story_files()
+            break
+
+
 def main():
     """Main entry point."""
     # Quick start options
@@ -878,6 +1097,21 @@ Usage:
 
     if mode is None:
         print("\n    *The book remains closed. For now.*\n")
+        return
+
+    # Handle continue mode
+    if mode == 'continue':
+        story_id = select_story()
+        if story_id is None:
+            # User went back, restart
+            return main()
+
+        story_content, genre = load_story(story_id)
+        if story_content:
+            print(f"\n    *Reopening: {genre}*")
+            print(f"    Story: {story_id}")
+            time.sleep(0.5)
+            continue_story(story_id, genre, story_content)
         return
 
     genre = get_genre()
