@@ -1189,46 +1189,64 @@ def process_response(text: str, genre: str = "adventure") -> str:
         files_for_git = [a[1] for a in artifacts_created if a[0] == 'file']
 
         print()
-        print(f"    {color}┌{'─' * 50}┐{reset}")
-        print(f"    {color}│{reset} {bold}ARTIFACTS CREATED{reset}{' ' * 32}{color}│{reset}")
-        print(f"    {color}├{'─' * 50}┤{reset}")
+        box_width = 52
+        inner_width = box_width - 2  # Inside the borders
+
+        print(f"    {color}┌{'─' * inner_width}┐{reset}")
+        print(f"    {color}│{reset} {bold}ARTIFACTS CREATED{reset}{' ' * (inner_width - 18)}{color}│{reset}")
+        print(f"    {color}├{'─' * inner_width}┤{reset}")
 
         for artifact in artifacts_created:
             if artifact[0] == 'file':
                 _, path, lines = artifact
                 filename = Path(path).name
-                print(f"    {color}│{reset}  ◆ {filename:<35} {dim}({lines} lines){reset} {color}│{reset}")
-                print(f"    {color}│{reset}    {dim}{path}{reset}")
-                # Pad to fill the box
-                padding = 50 - len(f"    {path}") + 4
-                if padding > 0:
-                    print(f"    {color}│{reset}{' ' * 49}{color}│{reset}")
+                # Truncate filename if too long
+                max_name = inner_width - 18  # Space for "  ◆ " + " (XXX lines)"
+                if len(filename) > max_name:
+                    filename = filename[:max_name-3] + "..."
+                line_info = f"({lines} lines)"
+                padding = inner_width - 4 - len(filename) - len(line_info)
+                print(f"    {color}│{reset}  ◆ {filename}{' ' * padding}{dim}{line_info}{reset} {color}│{reset}")
             elif artifact[0] == 'dir':
                 _, path = artifact
                 dirname = Path(path).name
-                print(f"    {color}│{reset}  ▪ {dirname}/ {dim}(directory){reset}")
+                if len(dirname) > inner_width - 16:
+                    dirname = dirname[:inner_width-19] + "..."
+                content = f"  ▪ {dirname}/ {dim}(directory){reset}"
+                # Calculate visible length (without ANSI codes)
+                visible_len = 4 + len(dirname) + 2 + 11  # "  ▪ " + dirname + "/ " + "(directory)"
+                pad = inner_width - visible_len
+                print(f"    {color}│{reset}{content}{' ' * max(0, pad)}{color}│{reset}")
             elif artifact[0] == 'truncated':
                 _, path = artifact
                 filename = Path(path).name
-                print(f"    {color}│{reset}  ⚠ {filename:<35} {dim}(truncated!){reset} {color}│{reset}")
-                # Show narrative error after the box
-                print(narrate_error('truncated', filename))
+                if len(filename) > inner_width - 18:
+                    filename = filename[:inner_width-21] + "..."
+                content = f"  ⚠ {filename}"
+                trunc_label = f"{dim}(truncated!){reset}"
+                padding = inner_width - 4 - len(filename) - 12
+                print(f"    {color}│{reset}{content}{' ' * max(0, padding)}{trunc_label} {color}│{reset}")
+                # Show narrative error after the box closes
             elif artifact[0] == 'error':
                 _, msg = artifact
-                print(f"    {color}│{reset}  ✗ {msg[:45]}")
-                # Show narrative error
-                print(narrate_error('file_error', msg[:50]))
+                max_msg = inner_width - 6
+                if len(msg) > max_msg:
+                    msg = msg[:max_msg-3] + "..."
+                padding = inner_width - 4 - len(msg)
+                print(f"    {color}│{reset}  ✗ {msg}{' ' * max(0, padding)}{color}│{reset}")
 
         # Git sync and show status
         if files_for_git:
-            print(f"    {color}├{'─' * 50}┤{reset}")
+            print(f"    {color}├{'─' * inner_width}┤{reset}")
             synced = git_sync_artifacts(files_for_git, genre)
             if synced:
-                print(f"    {color}│{reset}  ↑ {dim}Synced to GitHub{reset}{' ' * 31}{color}│{reset}")
+                sync_msg = "  ↑ Synced to GitHub"
+                print(f"    {color}│{reset}{dim}{sync_msg}{reset}{' ' * (inner_width - len(sync_msg))}{color}│{reset}")
             else:
-                print(f"    {color}│{reset}  ○ {dim}Local only{reset}{' ' * 37}{color}│{reset}")
+                sync_msg = "  ○ Local only"
+                print(f"    {color}│{reset}{dim}{sync_msg}{reset}{' ' * (inner_width - len(sync_msg))}{color}│{reset}")
 
-        print(f"    {color}└{'─' * 50}┘{reset}")
+        print(f"    {color}└{'─' * inner_width}┘{reset}")
 
         # Director's whispers - pattern echoes and convergence
         if HAS_REGISTRY:
