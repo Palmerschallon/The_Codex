@@ -998,6 +998,31 @@ def continue_story(story_id: str, genre: str, story_content: str):
     history = []
 
     print("\n    *The pages flutter open to where you left off...*\n")
+    print("="*60)
+    print("    STORY SO FAR:")
+    print("="*60)
+
+    # Display the story content (last portion if too long)
+    display_content = story_content
+    lines = display_content.split('\n')
+
+    # Skip metadata header, show narrative
+    in_narrative = False
+    narrative_lines = []
+    for line in lines:
+        if line.startswith('---') and not in_narrative:
+            in_narrative = True
+            continue
+        if in_narrative:
+            narrative_lines.append(line)
+
+    # Show last ~50 lines of narrative
+    recent_narrative = '\n'.join(narrative_lines[-50:]) if narrative_lines else display_content[-3000:]
+    print()
+    for line in recent_narrative.split('\n'):
+        print(f"    {line}")
+    print()
+    print("="*60)
     print("-"*60)
     print("    Type anything to interact. 'quit' to end.")
     print("-"*60)
