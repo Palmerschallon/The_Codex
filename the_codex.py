@@ -321,10 +321,45 @@ def stream_text(text, line_delay=0.03, char_delay=0.008):
 
 
 def thinking_indicator(stop_event, genre="adventure"):
-    """Silent wait - no visual output to avoid terminal issues."""
-    # Just wait for stop signal, no output
+    """Show atmospheric text with spinner while waiting."""
+    import random
+    import sys
+
+    # Genre-specific phrases
+    phrases = {
+        'horror': ["Something stirs in the darkness...", "The shadows grow longer...", "Whispers echo from nowhere..."],
+        'noir': ["Rain drums against the window...", "The city never sleeps...", "Smoke curls through the air..."],
+        'mystery': ["The pieces begin to connect...", "A clue reveals itself...", "Patterns emerge from chaos..."],
+        'heist': ["The plan takes shape...", "Security systems analyzed...", "Timing is everything..."],
+        'western': ["Dust settles on the horizon...", "The sun beats down...", "High noon approaches..."],
+        'scifi': ["Quantum calculations processing...", "Neural pathways synchronizing...", "Stellar coordinates aligned..."],
+        'cyberpunk': ["Jacking into the matrix...", "ICE protocols detected...", "Data streams converging..."],
+        'adventure': ["The story unfolds...", "Destiny awaits...", "A new chapter begins..."],
+        'comedy': ["Wait for it...", "The punchline approaches...", "Comedic timing loading..."],
+    }
+
+    # Find matching phrase list
+    phrase_list = phrases.get('adventure')
+    for key in phrases:
+        if key in genre.lower():
+            phrase_list = phrases[key]
+            break
+
+    phrase = random.choice(phrase_list)
+    spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+    idx = 0
+    dim = '\033[2m'
+    reset = '\033[0m'
+
     while not stop_event.is_set():
+        sys.stdout.write(f'\r    {dim}{phrase}{reset} {spinner[idx]}')
+        sys.stdout.flush()
+        idx = (idx + 1) % len(spinner)
         time.sleep(0.1)
+
+    # Clear the line
+    sys.stdout.write(f'\r{" " * (len(phrase) + 10)}\r')
+    sys.stdout.flush()
 
 
 def opening():
