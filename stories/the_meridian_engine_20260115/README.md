@@ -169,3 +169,15 @@ Victoria works frantically as you move, connecting additional components to her 
 **> "This way!" Victoria shouts over the industrial symphony of New Cascadia's evening shift change. Her mechanical arm extends a telescoping antenna as she follows the device's directional indicators. Steam hisses from manholes, and the rhythmic *clank-clank* of pneumatic message tubes echoes between the buildings.**
 
 - `network_mapper.py` - 199 lines
+# THE SIGNAL'S SOURCE
+
+"This way!" Victoria shouts over the industrial symphony of New Cascadia's evening shift change. Her mechanical arm extends a telescoping antenna as she follows the device's directional indicators. Steam hisses from manholes, and the rhythmic *clank-clank* of pneumatic message tubes echoes between the buildings.
+
+
+
+You follow her lead, your detective instincts keeping you alert to the shadows between the towering brass-fitted buildings. The portable analyzer in Victoria's arms begins emitting a more complex pattern—not just the steady *tick-tick-tick* from before, but a syncopated rhythm that seems almost musical.
+
+"Detective Kessler," she breathes, stopping suddenly beneath a flickering arc lamp. "Look at this pattern. It's not just random transmissions—they're coordinates. Building locations, times... it's a network."
+
+Her mechanical fingers work with impossible speed, connecting new modules to her device. The contraption grows more sophisticated by the moment as she adapts it to decode not just the signals but their underlying structure. The brass components gleam in the gaslight as steam from nearby pipes creates an ethereal fog around you both.
+
