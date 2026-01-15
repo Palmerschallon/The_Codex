@@ -29,3 +29,15 @@ She slides a crumpled piece of paper across the counter. Columns of seemingly ra
 **> please always provide options to proceed**
 
 - `message_log.txt` - 25 lines
+The lamplight flickers across Sarah's worried features as she continues, "I've been trying to make sense of these messages myself, but..." She gestures helplessly at the cryptic symbols. "My father, he used to say the desert keeps its secrets in copper and code. Maybe he was more right than he knew."
+
+Outside, the wind picks up, rattling the loose boards of the telegraph office. The sound of spurs on wooden planks echoes from somewhere down the street - late riders in a town that's learned to distrust strangers after dark.
+
+Sarah leans closer, her voice dropping to barely above a whisper. "There's something else. Yesterday, I saw lights moving around the old mine shaft. Not lanterns - something brighter, more... electric. And today, Jake Morrison's horse came back without him. He was heading up to Blackrock, said he had business there."
+
+She opens a leather-bound ledger, revealing pages of her careful handwriting - timestamps, message fragments, and detailed observations. "I've been keeping records of everything. My father taught me that patterns tell stories, if you know how to listen."
+
+The telegraph key suddenly springs to life with a sharp *tap-tap-tap*, making you both jump. Sarah's hand moves instinctively toward the apparatus, then stops.
+
+"It's starting again," she breathes. "Same time as always, even though it's early tonight."
+
