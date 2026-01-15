@@ -93,3 +93,17 @@ As you watch the building, you notice something unsettling: despite appearing ab
 **> you forgot to present options**
 
 - `location_tracker.py` - 251 lines
+# THE HUNT BEGINS
+
+The brass-fitted doors of the foundry slam open as you and Victoria burst into the coal-scented evening air. She clutches a portable version of her signal analyzer—a briefcase-sized contraption of brass tubes, copper wire antennas, and what appears to be a miniature version of her punch-card processing system.
+
+"This way!" Victoria shouts over the industrial symphony of New Cascadia's evening shift change. Her mechanical arm extends a telescoping antenna as she follows the device's directional indicators. Steam hisses from manholes, and the rhythmic *clank-clank* of pneumatic message tubes echoes between the buildings.
+
+You follow her through the maze of industrial streets, past workers streaming out of factories, their faces blackened with coal dust and machine oil. Overhead, the skeletal framework of transmission towers creates a spider web against the darkening sky, while dirigibles drift between them like sleeping giants.
+
+
+
+Victoria's detector grows more frantic, its brass dials spinning wildly as you approach the old Meridian Research Station—a seven-story building of riveted steel and brass fittings, crowned with an array of communication equipment that seems far too sophisticated for 1934. The building appears abandoned, its windows dark except for a faint amber glow emanating from the upper floors.
+
+"The signal's strongest here," Victoria whispers, her breath visible in the cooling air. She's been quietly enhancing her portable analyzer with additional tracking capabilities as you moved through the city.
+
