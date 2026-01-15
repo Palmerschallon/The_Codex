@@ -1,199 +1,248 @@
 #!/usr/bin/env python3
 """
-The Meridian Network Mapper - Victoria's field modification to track signal networks
-
-A real network analysis tool for mapping communication patterns and predicting
-transmission sources based on signal timing and frequency analysis.
+The Meridian Network Mapper - Victoria's Brass-Fitted Signal Tracer
+A real-time network analysis tool disguised as a dieselpunk invention.
 """
 
-import time
-import json
-import math
+import socket
+import subprocess
+import platform
 import threading
-from datetime import datetime, timedelta
-from collections import defaultdict, deque
-from dataclasses import dataclass
-from typing import Dict, List, Tuple, Optional
+import time
+from collections import defaultdict
+import json
+from datetime import datetime
 
-@dataclass
-class SignalReading:
-    timestamp: float
-    frequency: float
-    strength: float
-    direction: float  # degrees from north
-    location: Tuple[float, float]  # lat, lon of receiver
-
-class NetworkMapper:
-    """Maps communication networks by analyzing signal patterns and timing"""
+class MeridianNetworkMapper:
+    """
+    Victoria Brassheart's Network Mapping Device
+    Maps active network connections and analyzes traffic patterns
+    """
     
     def __init__(self):
-        self.signal_history = deque(maxlen=1000)
-        self.transmission_patterns = defaultdict(list)
-        self.network_nodes = {}
-        self.prediction_window = 300  # 5 minutes
+        self.active_connections = {}
+        self.traffic_patterns = defaultdict(list)
+        self.suspicious_ports = [22, 23, 80, 443, 3389, 5900, 8080]
+        self.monitoring = False
         
-    def add_signal(self, reading: SignalReading):
-        """Process a new signal reading and update network map"""
-        self.signal_history.append(reading)
+    def scan_local_network(self, target_range="192.168.1.0/24"):
+        """
+        The Brass Frequency Sweeper - scans for active devices
+        """
+        print(f"[MERIDIAN SCANNER] Sweeping frequency range: {target_range}")
+        active_devices = []
         
-        # Group signals by frequency for pattern analysis
-        freq_key = round(reading.frequency, 1)
-        self.transmission_patterns[freq_key].append(reading)
+        # Extract base IP and range
+        base_ip = ".".join(target_range.split(".")[:-1])
         
-        # Triangulate if we have multiple readings
-        self._attempt_triangulation(reading)
-        
-    def _attempt_triangulation(self, new_reading: SignalReading):
-        """Try to locate transmission source using multiple readings"""
-        recent_readings = [r for r in self.signal_history 
-                          if abs(r.frequency - new_reading.frequency) < 0.1
-                          and r.timestamp > new_reading.timestamp - 30]
-        
-        if len(recent_readings) >= 2:
-            location = self._triangulate_source(recent_readings)
-            if location:
-                self.network_nodes[new_reading.frequency] = {
-                    'location': location,
-                    'last_seen': new_reading.timestamp,
-                    'strength': new_reading.strength
-                }
-    
-    def _triangulate_source(self, readings: List[SignalReading]) -> Optional[Tuple[float, float]]:
-        """Triangulate transmission source from multiple directional readings"""
-        if len(readings) < 2:
-            return None
+        for i in range(1, 255):
+            ip = f"{base_ip}.{i}"
             
-        # Simple triangulation using intersection of bearing lines
-        # In a real implementation, this would be more sophisticated
-        lines = []
-        for reading in readings[:3]:  # Use up to 3 readings for accuracy
-            # Convert bearing to line equation
-            bearing_rad = math.radians(reading.direction)
-            x1, y1 = reading.location
+            # Use ping to check if device is active
+            param = "-n" if platform.system().lower() == "windows" else "-c"
             
-            # Point along bearing line
-            x2 = x1 + math.sin(bearing_rad)
-            y2 = y1 + math.cos(bearing_rad)
-            
-            lines.append(((x1, y1), (x2, y2)))
-        
-        if len(lines) >= 2:
-            intersection = self._line_intersection(lines[0], lines[1])
-            return intersection
-            
-        return None
-    
-    def _line_intersection(self, line1, line2):
-        """Find intersection of two lines"""
-        (x1, y1), (x2, y2) = line1
-        (x3, y3), (x4, y4) = line2
-        
-        denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
-        if abs(denom) < 1e-10:
-            return None  # Lines are parallel
-            
-        t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denom
-        
-        intersection_x = x1 + t * (x2 - x1)
-        intersection_y = y1 + t * (y2 - y1)
-        
-        return (intersection_x, intersection_y)
-    
-    def predict_next_transmission(self, frequency: float) -> Optional[datetime]:
-        """Predict when the next transmission might occur on this frequency"""
-        if frequency not in self.transmission_patterns:
-            return None
-            
-        readings = self.transmission_patterns[frequency]
-        if len(readings) < 3:
-            return None
-            
-        # Analyze timing patterns
-        recent_readings = [r for r in readings if r.timestamp > time.time() - 3600]
-        if len(recent_readings) < 2:
-            return None
-            
-        # Look for periodic patterns in transmission times
-        intervals = []
-        for i in range(1, len(recent_readings)):
-            interval = recent_readings[i].timestamp - recent_readings[i-1].timestamp
-            intervals.append(interval)
-        
-        if intervals:
-            # Use median interval as prediction basis
-            intervals.sort()
-            median_interval = intervals[len(intervals) // 2]
-            
-            last_transmission = recent_readings[-1].timestamp
-            next_transmission = last_transmission + median_interval
-            
-            return datetime.fromtimestamp(next_transmission)
-            
-        return None
-    
-    def get_network_summary(self) -> Dict:
-        """Get a summary of the detected network"""
-        active_frequencies = []
-        
-        current_time = time.time()
-        for freq, readings in self.transmission_patterns.items():
-            recent_activity = [r for r in readings 
-                             if current_time - r.timestamp < 1800]  # 30 minutes
-            
-            if recent_activity:
-                next_predicted = self.predict_next_transmission(freq)
+            try:
+                result = subprocess.run(
+                    ["ping", param, "1", "-W", "1000", ip],
+                    capture_output=True,
+                    timeout=2
+                )
+                if result.returncode == 0:
+                    active_devices.append(ip)
+                    print(f"[SIGNAL DETECTED] Device at {ip}")
+            except subprocess.TimeoutExpired:
+                continue
                 
-                active_frequencies.append({
-                    'frequency': freq,
-                    'last_activity': max(r.timestamp for r in recent_activity),
-                    'transmission_count': len(recent_activity),
-                    'predicted_next': next_predicted.isoformat() if next_predicted else None,
-                    'estimated_location': self.network_nodes.get(freq, {}).get('location')
-                })
-        
-        return {
-            'active_frequencies': active_frequencies,
-            'total_nodes': len(self.network_nodes),
-            'analysis_time': datetime.now().isoformat()
-        }
+        return active_devices
     
-    def export_network_data(self, filename: str):
-        """Export network analysis for further investigation"""
-        data = {
-            'network_summary': self.get_network_summary(),
-            'signal_history': [
-                {
-                    'timestamp': r.timestamp,
-                    'frequency': r.frequency,
-                    'strength': r.strength,
-                    'direction': r.direction,
-                    'location': r.location
-                }
-                for r in list(self.signal_history)[-100:]  # Last 100 readings
-            ]
+    def analyze_open_ports(self, target_ip, port_range=None):
+        """
+        The Brass Port Analyzer - checks for open communication channels
+        """
+        if port_range is None:
+            port_range = self.suspicious_ports
+            
+        print(f"[MERIDIAN ANALYZER] Scanning ports on {target_ip}")
+        open_ports = []
+        
+        for port in port_range:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(1)
+            
+            try:
+                result = sock.connect_ex((target_ip, port))
+                if result == 0:
+                    open_ports.append(port)
+                    print(f"[OPEN CHANNEL] Port {port} on {target_ip}")
+            except:
+                pass
+            finally:
+                sock.close()
+                
+        return open_ports
+    
+    def monitor_connections(self, duration=60):
+        """
+        The Brass Traffic Monitor - watches network activity in real-time
+        """
+        print(f"[MERIDIAN MONITOR] Beginning {duration}s surveillance sweep...")
+        self.monitoring = True
+        
+        def connection_tracker():
+            start_time = time.time()
+            while self.monitoring and (time.time() - start_time) < duration:
+                try:
+                    # Get network connections (platform specific)
+                    if platform.system().lower() == "windows":
+                        result = subprocess.run(
+                            ["netstat", "-an"], 
+                            capture_output=True, 
+                            text=True
+                        )
+                    else:
+                        result = subprocess.run(
+                            ["netstat", "-an"], 
+                            capture_output=True, 
+                            text=True
+                        )
+                    
+                    timestamp = datetime.now().isoformat()
+                    connections = self._parse_netstat_output(result.stdout)
+                    
+                    for conn in connections:
+                        conn_id = f"{conn['local_addr']}:{conn['local_port']}-{conn['remote_addr']}:{conn['remote_port']}"
+                        self.traffic_patterns[conn_id].append({
+                            'timestamp': timestamp,
+                            'state': conn['state'],
+                            'protocol': conn['protocol']
+                        })
+                    
+                    time.sleep(5)  # Sample every 5 seconds
+                    
+                except Exception as e:
+                    print(f"[MERIDIAN ERROR] Monitoring error: {e}")
+                    
+        # Start monitoring in background thread
+        monitor_thread = threading.Thread(target=connection_tracker)
+        monitor_thread.daemon = True
+        monitor_thread.start()
+        
+        return monitor_thread
+    
+    def _parse_netstat_output(self, netstat_output):
+        """Parse netstat output into structured connection data"""
+        connections = []
+        lines = netstat_output.split('\n')
+        
+        for line in lines:
+            parts = line.split()
+            if len(parts) >= 4 and (parts[0] in ['TCP', 'UDP']):
+                try:
+                    protocol = parts[0]
+                    local_addr_port = parts[1].rsplit(':', 1)
+                    remote_addr_port = parts[2].rsplit(':', 1)
+                    state = parts[3] if len(parts) > 3 else "UNKNOWN"
+                    
+                    if len(local_addr_port) == 2 and len(remote_addr_port) == 2:
+                        connections.append({
+                            'protocol': protocol,
+                            'local_addr': local_addr_port[0],
+                            'local_port': local_addr_port[1],
+                            'remote_addr': remote_addr_port[0],
+                            'remote_port': remote_addr_port[1],
+                            'state': state
+                        })
+                except:
+                    continue
+                    
+        return connections
+    
+    def generate_network_map(self):
+        """
+        The Brass Network Cartographer - creates a visual map of discovered networks
+        """
+        network_map = {
+            'timestamp': datetime.now().isoformat(),
+            'discovered_devices': [],
+            'connection_patterns': {},
+            'suspicious_activity': []
         }
+        
+        # Analyze traffic patterns for suspicious activity
+        for conn_id, traffic_history in self.traffic_patterns.items():
+            if len(traffic_history) > 10:  # Frequent connections
+                network_map['suspicious_activity'].append({
+                    'connection': conn_id,
+                    'frequency': len(traffic_history),
+                    'pattern': 'high_frequency'
+                })
+                
+            network_map['connection_patterns'][conn_id] = {
+                'total_connections': len(traffic_history),
+                'first_seen': traffic_history[0]['timestamp'] if traffic_history else None,
+                'last_seen': traffic_history[-1]['timestamp'] if traffic_history else None
+            }
+        
+        return network_map
+    
+    def stop_monitoring(self):
+        """Stop the network monitoring process"""
+        print("[MERIDIAN SCANNER] Shutting down surveillance...")
+        self.monitoring = False
+    
+    def save_intelligence_report(self, filename="meridian_network_intelligence.json"):
+        """
+        The Brass Intelligence Archive - saves reconnaissance data
+        """
+        report = self.generate_network_map()
         
         with open(filename, 'w') as f:
-            json.dump(data, f, indent=2)
+            json.dump(report, f, indent=2)
+            
+        print(f"[MERIDIAN ARCHIVE] Intelligence report saved to {filename}")
+        return filename
 
-def main():
-    """Demonstration of network mapping capabilities"""
-    mapper = NetworkMapper()
+# Victoria's Quick Deployment Functions
+def quick_network_sweep(target_range="192.168.1.0/24"):
+    """Victoria's emergency network sweep - one command deployment"""
+    mapper = MeridianNetworkMapper()
+    print("[MERIDIAN EMERGENCY SWEEP] Deploying brass scanners...")
     
-    print("Meridian Network Mapper - Signal Analysis Tool")
-    print("=" * 50)
+    # Quick scan of local network
+    devices = mapper.scan_local_network(target_range)
     
-    # In a real scenario, this would receive live signal data
-    # For demo, we'll show the analysis capabilities
+    # Port scan the first few active devices
+    for device in devices[:5]:  # Limit to first 5 for speed
+        ports = mapper.analyze_open_ports(device)
+        if ports:
+            print(f"[INTELLIGENCE] Device {device} has open channels: {ports}")
     
-    print("\nFeatures:")
-    print("- Real-time signal triangulation")
-    print("- Pattern analysis and prediction")
-    print("- Network topology mapping")
-    print("- Export capabilities for investigation")
-    
-    print(f"\nReady to analyze transmission networks...")
-    print("(Use add_signal() method with SignalReading objects)")
+    return devices
 
 if __name__ == "__main__":
-    main()
+    print("=" * 60)
+    print("VICTORIA BRASSHEART'S MERIDIAN NETWORK MAPPER")
+    print("Industrial Network Reconnaissance Device - Model 1934")
+    print("=" * 60)
+    
+    mapper = MeridianNetworkMapper()
+    
+    # Run a quick network sweep
+    print("\n[BRASS DEPLOYMENT] Initializing frequency sweepers...")
+    devices = quick_network_sweep()
+    
+    if devices:
+        print(f"\n[MERIDIAN INTELLIGENCE] Discovered {len(devices)} active devices")
+        
+        # Start monitoring for 30 seconds
+        print("\n[SURVEILLANCE MODE] Beginning traffic analysis...")
+        monitor_thread = mapper.monitor_connections(30)
+        
+        time.sleep(30)
+        mapper.stop_monitoring()
+        
+        # Generate and save report
+        report_file = mapper.save_intelligence_report()
+        print(f"\n[MISSION COMPLETE] Full intelligence report available in {report_file}")
+    else:
+        print("\n[MERIDIAN REPORT] No active devices detected in range")

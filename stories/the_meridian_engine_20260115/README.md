@@ -181,3 +181,9 @@ You follow her lead, your detective instincts keeping you alert to the shadows b
 
 Her mechanical fingers work with impossible speed, connecting new modules to her device. The contraption grows more sophisticated by the moment as she adapts it to decode not just the signals but their underlying structure. The brass components gleam in the gaslight as steam from nearby pipes creates an ethereal fog around you both.
 
+
+---
+
+**> You follow her through the maze of industrial streets, past workers streaming out of factories, their faces blackened with coal dust and machine oil. Overhead, the skeletal framework of transmission towers creates a spider web against the darkening sky, while dirigibles drift between them like sleeping giants.**
+
+- `network_mapper.py` - 248 lines
