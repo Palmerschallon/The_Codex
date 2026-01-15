@@ -57,3 +57,9 @@ Elena's deck chirps softly, and she pulls up another display—this one showing 
 
 She begins typing rapidly, her bioluminescent tattoos flaring brighter. "I'm writing a probe—something that can scan file systems and detect traces of corporate surveillance malware. If Meridian's watchers have infiltrated your suggested location, we'll know."
 
+
+---
+
+**> ok test it on /home/palmerschallon/ember**
+
+- `meridian_probe.py` - 222 lines
