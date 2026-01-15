@@ -161,3 +161,13 @@ She cracks her knuckles, a sound like breaking plastic thanks to her subdermal i
 **> /ember is really large maybe you need a more targeted approach**
 
 - `archaeological_mapper.py` - 226 lines
+Elena's fingers pause over her deck as the implications sink in. Her cybernetic contacts dim slightly as she processes this new information.
+
+"Of course," she whispers, a knowing smile crossing her face. "I was thinking like a street hacker, not an archaeologist. If `/ember` is massive, then we're not dealing with a simple cache—we're looking at a digital excavation site that's been growing for years."
+
+She begins rapidly recoding her probe, her movements more deliberate now. "Ghost, remember the Meridian archives in '79? Terabytes of nested corporate secrets, but the real treasure was always in the hidden subdirectories."
+
+Ghost nods, his amber eye adjusting focus. "Surgical strikes, not carpet bombing."
+
+"Exactly." Elena's tattoos pulse in steady, methodical patterns. "Instead of scanning everything, I'll build a targeted reconnaissance tool. Something that can identify the most promising archaeological sites within your collection, then focus our deep scans on specific targets."
+
