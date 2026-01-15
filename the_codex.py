@@ -130,9 +130,52 @@ def start_story_session(genre: str) -> str:
     return session_id
 
 
-def generate_story_title(opening_text: str, genre: str) -> str:
-    """Ask Claude to generate a poetic title for the story."""
-    prompt = f"""Based on this story opening, generate a compelling 2-5 word title.
+def get_existing_story_titles() -> list:
+    """Get list of existing story titles to avoid duplicates."""
+    stories_path = Path(CODEX_REPO_PATH) / "stories"
+    if not stories_path.exists():
+        return []
+
+    titles = []
+    for d in stories_path.iterdir():
+        if d.is_dir():
+            readme = d / "README.md"
+            if readme.exists():
+                try:
+                    first_line = readme.read_text().split('\n')[0]
+                    # Extract title from "# Title Here"
+                    title = first_line.replace('#', '').strip()
+                    if title:
+                        titles.append(title)
+                except:
+                    pass
+    return titles
+
+
+def title_to_slug(title: str) -> str:
+    """Convert a title to a slug for comparison."""
+    slug = title.lower().replace(' ', '_').replace('-', '_')
+    slug = ''.join(c for c in slug if c.isalnum() or c == '_')
+    while '__' in slug:
+        slug = slug.replace('__', '_')
+    return slug.strip('_')
+
+
+def generate_story_title(opening_text: str, genre: str, max_attempts: int = 3) -> str:
+    """Ask Claude to generate a unique poetic title for the story."""
+    existing_titles = get_existing_story_titles()
+    existing_slugs = [title_to_slug(t) for t in existing_titles]
+
+    # Build list of titles to avoid
+    avoid_list = ""
+    if existing_titles:
+        avoid_list = f"""
+EXISTING TITLES (DO NOT USE THESE OR SIMILAR):
+{chr(10).join(f'- {t}' for t in existing_titles[-10:])}
+"""
+
+    for attempt in range(max_attempts):
+        prompt = f"""Based on this story opening, generate a compelling 2-5 word title.
 
 GENRE: {genre}
 
@@ -143,25 +186,33 @@ RULES:
 1. The title should be evocative and fit the genre
 2. 2-5 words only
 3. No quotes, colons, or punctuation except hyphens
-4. Make it memorable and unique
+4. Make it memorable and UNIQUE
 5. Return ONLY the title, nothing else
-
+{avoid_list}
 Examples of good titles:
 - "The Signal In The Dust"
 - "Blood And Clockwork"
 - "Where The Code Remembers"
 - "Echoes Of The Algorithm"
 """
-    try:
-        title = ask_anthropic_api(prompt, model="claude-sonnet-4-20250514", timeout=30)
-        if title:
-            # Clean up the title
-            title = title.strip().strip('"\'')
-            # Ensure it's reasonable length
-            if 2 <= len(title.split()) <= 7:
-                return title
-    except Exception:
-        pass
+        try:
+            title = ask_anthropic_api(prompt, model="claude-sonnet-4-20250514", timeout=30)
+            if title:
+                # Clean up the title
+                title = title.strip().strip('"\'')
+                # Ensure it's reasonable length
+                if 2 <= len(title.split()) <= 7:
+                    # Check for uniqueness
+                    new_slug = title_to_slug(title)
+                    if new_slug not in existing_slugs:
+                        return title
+                    else:
+                        # Title exists, add to avoid list for next attempt
+                        avoid_list += f"\n- {title} (ALREADY USED)"
+        except Exception:
+            pass
+
+    # All attempts failed, return None (will keep original session ID)
     return None
 
 
