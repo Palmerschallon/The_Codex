@@ -1,248 +1,194 @@
-#!/usr/bin/env python3
 """
-The Meridian Network Mapper - Victoria's Brass-Fitted Signal Tracer
-A real-time network analysis tool disguised as a dieselpunk invention.
+THE MERIDIAN ENGINE - Network Traffic Mapper
+Real-time visualization of network connections and traffic patterns
+
+Victoria Brassheart's improvised network visualization device
 """
 
 import socket
-import subprocess
-import platform
 import threading
 import time
-from collections import defaultdict
-import json
+from collections import defaultdict, deque
 from datetime import datetime
+import json
 
-class MeridianNetworkMapper:
+class NetworkMapper:
     """
-    Victoria Brassheart's Network Mapping Device
-    Maps active network connections and analyzes traffic patterns
+    Maps and visualizes active network connections in real-time
+    Useful for detecting unusual traffic patterns or unauthorized connections
     """
     
-    def __init__(self):
-        self.active_connections = {}
-        self.traffic_patterns = defaultdict(list)
-        self.suspicious_ports = [22, 23, 80, 443, 3389, 5900, 8080]
+    def __init__(self, max_history=1000):
+        self.connections = defaultdict(list)
+        self.traffic_history = deque(maxlen=max_history)
+        self.active_ports = set()
+        self.suspicious_patterns = []
         self.monitoring = False
         
-    def scan_local_network(self, target_range="192.168.1.0/24"):
-        """
-        The Brass Frequency Sweeper - scans for active devices
-        """
-        print(f"[MERIDIAN SCANNER] Sweeping frequency range: {target_range}")
-        active_devices = []
-        
-        # Extract base IP and range
-        base_ip = ".".join(target_range.split(".")[:-1])
-        
-        for i in range(1, 255):
-            ip = f"{base_ip}.{i}"
-            
-            # Use ping to check if device is active
-            param = "-n" if platform.system().lower() == "windows" else "-c"
-            
-            try:
-                result = subprocess.run(
-                    ["ping", param, "1", "-W", "1000", ip],
-                    capture_output=True,
-                    timeout=2
-                )
-                if result.returncode == 0:
-                    active_devices.append(ip)
-                    print(f"[SIGNAL DETECTED] Device at {ip}")
-            except subprocess.TimeoutExpired:
-                continue
-                
-        return active_devices
-    
-    def analyze_open_ports(self, target_ip, port_range=None):
-        """
-        The Brass Port Analyzer - checks for open communication channels
-        """
-        if port_range is None:
-            port_range = self.suspicious_ports
-            
-        print(f"[MERIDIAN ANALYZER] Scanning ports on {target_ip}")
-        open_ports = []
-        
-        for port in port_range:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(1)
-            
-            try:
-                result = sock.connect_ex((target_ip, port))
-                if result == 0:
-                    open_ports.append(port)
-                    print(f"[OPEN CHANNEL] Port {port} on {target_ip}")
-            except:
-                pass
-            finally:
-                sock.close()
-                
-        return open_ports
-    
-    def monitor_connections(self, duration=60):
-        """
-        The Brass Traffic Monitor - watches network activity in real-time
-        """
-        print(f"[MERIDIAN MONITOR] Beginning {duration}s surveillance sweep...")
+    def start_monitoring(self, duration=60):
+        """Begin monitoring network activity"""
         self.monitoring = True
-        
-        def connection_tracker():
-            start_time = time.time()
-            while self.monitoring and (time.time() - start_time) < duration:
-                try:
-                    # Get network connections (platform specific)
-                    if platform.system().lower() == "windows":
-                        result = subprocess.run(
-                            ["netstat", "-an"], 
-                            capture_output=True, 
-                            text=True
-                        )
-                    else:
-                        result = subprocess.run(
-                            ["netstat", "-an"], 
-                            capture_output=True, 
-                            text=True
-                        )
-                    
-                    timestamp = datetime.now().isoformat()
-                    connections = self._parse_netstat_output(result.stdout)
-                    
-                    for conn in connections:
-                        conn_id = f"{conn['local_addr']}:{conn['local_port']}-{conn['remote_addr']}:{conn['remote_port']}"
-                        self.traffic_patterns[conn_id].append({
-                            'timestamp': timestamp,
-                            'state': conn['state'],
-                            'protocol': conn['protocol']
-                        })
-                    
-                    time.sleep(5)  # Sample every 5 seconds
-                    
-                except Exception as e:
-                    print(f"[MERIDIAN ERROR] Monitoring error: {e}")
-                    
-        # Start monitoring in background thread
-        monitor_thread = threading.Thread(target=connection_tracker)
+        monitor_thread = threading.Thread(target=self._monitor_loop, args=(duration,))
         monitor_thread.daemon = True
         monitor_thread.start()
         
-        return monitor_thread
-    
-    def _parse_netstat_output(self, netstat_output):
-        """Parse netstat output into structured connection data"""
-        connections = []
-        lines = netstat_output.split('\n')
+    def _monitor_loop(self, duration):
+        """Main monitoring loop - scans for active connections"""
+        start_time = time.time()
         
-        for line in lines:
-            parts = line.split()
-            if len(parts) >= 4 and (parts[0] in ['TCP', 'UDP']):
-                try:
-                    protocol = parts[0]
-                    local_addr_port = parts[1].rsplit(':', 1)
-                    remote_addr_port = parts[2].rsplit(':', 1)
-                    state = parts[3] if len(parts) > 3 else "UNKNOWN"
+        while self.monitoring and (time.time() - start_time) < duration:
+            try:
+                # Scan common ports for activity
+                for port in range(21, 1025):  # Common service ports
+                    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    sock.settimeout(0.1)
                     
-                    if len(local_addr_port) == 2 and len(remote_addr_port) == 2:
-                        connections.append({
-                            'protocol': protocol,
-                            'local_addr': local_addr_port[0],
-                            'local_port': local_addr_port[1],
-                            'remote_addr': remote_addr_port[0],
-                            'remote_port': remote_addr_port[1],
-                            'state': state
-                        })
-                except:
-                    continue
+                    # Check localhost
+                    result = sock.connect_ex(('127.0.0.1', port))
+                    if result == 0:
+                        self._record_connection('127.0.0.1', port)
+                        self.active_ports.add(port)
                     
-        return connections
-    
-    def generate_network_map(self):
-        """
-        The Brass Network Cartographer - creates a visual map of discovered networks
-        """
-        network_map = {
-            'timestamp': datetime.now().isoformat(),
-            'discovered_devices': [],
-            'connection_patterns': {},
-            'suspicious_activity': []
+                    sock.close()
+                    
+                    if not self.monitoring:
+                        break
+                        
+                # Brief pause between scans
+                time.sleep(1)
+                
+            except Exception as e:
+                continue
+                
+    def _record_connection(self, host, port):
+        """Record a detected connection"""
+        timestamp = datetime.now()
+        connection = {
+            'timestamp': timestamp.isoformat(),
+            'host': host,
+            'port': port,
+            'service': self._identify_service(port)
         }
         
-        # Analyze traffic patterns for suspicious activity
-        for conn_id, traffic_history in self.traffic_patterns.items():
-            if len(traffic_history) > 10:  # Frequent connections
-                network_map['suspicious_activity'].append({
-                    'connection': conn_id,
-                    'frequency': len(traffic_history),
-                    'pattern': 'high_frequency'
-                })
-                
-            network_map['connection_patterns'][conn_id] = {
-                'total_connections': len(traffic_history),
-                'first_seen': traffic_history[0]['timestamp'] if traffic_history else None,
-                'last_seen': traffic_history[-1]['timestamp'] if traffic_history else None
-            }
+        self.connections[f"{host}:{port}"].append(connection)
+        self.traffic_history.append(connection)
         
-        return network_map
+        # Check for suspicious patterns
+        self._analyze_pattern(host, port)
+        
+    def _identify_service(self, port):
+        """Identify common services by port number"""
+        common_ports = {
+            21: "FTP", 22: "SSH", 23: "TELNET", 25: "SMTP",
+            53: "DNS", 80: "HTTP", 110: "POP3", 143: "IMAP",
+            443: "HTTPS", 993: "IMAPS", 995: "POP3S"
+        }
+        return common_ports.get(port, "UNKNOWN")
+        
+    def _analyze_pattern(self, host, port):
+        """Detect suspicious connection patterns"""
+        # Count recent connections to this endpoint
+        recent_count = len([c for c in self.traffic_history 
+                           if c['host'] == host and c['port'] == port])
+        
+        # Flag unusual activity
+        if recent_count > 10:  # Rapid repeated connections
+            pattern = f"HIGH_FREQUENCY: {host}:{port} ({recent_count} connections)"
+            if pattern not in self.suspicious_patterns:
+                self.suspicious_patterns.append(pattern)
+                
+        # Flag unusual ports
+        if port > 8000:  # High port numbers
+            pattern = f"HIGH_PORT: {host}:{port}"
+            if pattern not in self.suspicious_patterns:
+                self.suspicious_patterns.append(pattern)
     
     def stop_monitoring(self):
-        """Stop the network monitoring process"""
-        print("[MERIDIAN SCANNER] Shutting down surveillance...")
+        """Stop the monitoring process"""
         self.monitoring = False
-    
-    def save_intelligence_report(self, filename="meridian_network_intelligence.json"):
-        """
-        The Brass Intelligence Archive - saves reconnaissance data
-        """
-        report = self.generate_network_map()
+        
+    def get_network_map(self):
+        """Return current network topology"""
+        nodes = set()
+        edges = []
+        
+        for endpoint, connections in self.connections.items():
+            host, port = endpoint.split(':')
+            nodes.add(f"LOCAL")
+            nodes.add(f"{host}:{port}")
+            
+            edges.append({
+                'source': 'LOCAL',
+                'target': f"{host}:{port}",
+                'service': connections[-1]['service'] if connections else 'UNKNOWN',
+                'connections': len(connections)
+            })
+            
+        return {
+            'nodes': list(nodes),
+            'edges': edges,
+            'total_connections': len(self.traffic_history),
+            'active_ports': sorted(list(self.active_ports)),
+            'suspicious_patterns': self.suspicious_patterns
+        }
+        
+    def export_analysis(self, filename):
+        """Export network analysis to file"""
+        analysis = {
+            'scan_timestamp': datetime.now().isoformat(),
+            'network_map': self.get_network_map(),
+            'traffic_history': list(self.traffic_history),
+            'summary': {
+                'unique_endpoints': len(self.connections),
+                'total_traffic': len(self.traffic_history),
+                'suspicious_patterns': len(self.suspicious_patterns)
+            }
+        }
         
         with open(filename, 'w') as f:
-            json.dump(report, f, indent=2)
+            json.dump(analysis, f, indent=2)
             
-        print(f"[MERIDIAN ARCHIVE] Intelligence report saved to {filename}")
-        return filename
+    def print_status(self):
+        """Display current monitoring status"""
+        print("=" * 60)
+        print("MERIDIAN NETWORK MAPPER - STATUS REPORT")
+        print("=" * 60)
+        
+        network_map = self.get_network_map()
+        
+        print(f"Active Monitoring: {'YES' if self.monitoring else 'NO'}")
+        print(f"Total Connections: {network_map['total_connections']}")
+        print(f"Unique Endpoints: {len(self.connections)}")
+        print(f"Active Ports: {len(network_map['active_ports'])}")
+        
+        if network_map['active_ports']:
+            print(f"Port Range: {min(network_map['active_ports'])}-{max(network_map['active_ports'])}")
+            
+        print(f"\nSuspicious Patterns: {len(network_map['suspicious_patterns'])}")
+        for pattern in network_map['suspicious_patterns']:
+            print(f"  ⚠ {pattern}")
+            
+        if network_map['edges']:
+            print(f"\nRecent Connections:")
+            for edge in network_map['edges'][-5:]:  # Last 5
+                print(f"  {edge['source']} → {edge['target']} ({edge['service']})")
 
-# Victoria's Quick Deployment Functions
-def quick_network_sweep(target_range="192.168.1.0/24"):
-    """Victoria's emergency network sweep - one command deployment"""
-    mapper = MeridianNetworkMapper()
-    print("[MERIDIAN EMERGENCY SWEEP] Deploying brass scanners...")
-    
-    # Quick scan of local network
-    devices = mapper.scan_local_network(target_range)
-    
-    # Port scan the first few active devices
-    for device in devices[:5]:  # Limit to first 5 for speed
-        ports = mapper.analyze_open_ports(device)
-        if ports:
-            print(f"[INTELLIGENCE] Device {device} has open channels: {ports}")
-    
-    return devices
-
+# Usage example for the story
 if __name__ == "__main__":
-    print("=" * 60)
-    print("VICTORIA BRASSHEART'S MERIDIAN NETWORK MAPPER")
-    print("Industrial Network Reconnaissance Device - Model 1934")
-    print("=" * 60)
+    # Victoria's network mapper in action
+    mapper = NetworkMapper()
     
-    mapper = MeridianNetworkMapper()
+    print("Initializing Meridian Network Mapper...")
+    print("Scanning for active connections...")
     
-    # Run a quick network sweep
-    print("\n[BRASS DEPLOYMENT] Initializing frequency sweepers...")
-    devices = quick_network_sweep()
+    mapper.start_monitoring(duration=30)
     
-    if devices:
-        print(f"\n[MERIDIAN INTELLIGENCE] Discovered {len(devices)} active devices")
-        
-        # Start monitoring for 30 seconds
-        print("\n[SURVEILLANCE MODE] Beginning traffic analysis...")
-        monitor_thread = mapper.monitor_connections(30)
-        
-        time.sleep(30)
-        mapper.stop_monitoring()
-        
-        # Generate and save report
-        report_file = mapper.save_intelligence_report()
-        print(f"\n[MISSION COMPLETE] Full intelligence report available in {report_file}")
-    else:
-        print("\n[MERIDIAN REPORT] No active devices detected in range")
+    # Monitor for 30 seconds
+    time.sleep(30)
+    
+    mapper.stop_monitoring()
+    mapper.print_status()
+    
+    # Export findings
+    mapper.export_analysis("meridian_network_scan.json")
+    print("\nAnalysis exported to meridian_network_scan.json")
