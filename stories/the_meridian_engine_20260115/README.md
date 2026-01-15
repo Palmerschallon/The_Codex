@@ -163,3 +163,9 @@ You sprint through the industrial maze of New Cascadia, past workers emerging fr
 
 Victoria works frantically as you move, connecting additional components to her portable analyzer. She's creating something that can not only track these elusive signals but predict where they'll appear next.
 
+
+---
+
+**> "This way!" Victoria shouts over the industrial symphony of New Cascadia's evening shift change. Her mechanical arm extends a telescoping antenna as she follows the device's directional indicators. Steam hisses from manholes, and the rhythmic *clank-clank* of pneumatic message tubes echoes between the buildings.**
+
+- `network_mapper.py` - 199 lines
