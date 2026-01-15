@@ -65,3 +65,9 @@ B) Study the pattern board more carefully to identify what type of facility migh
 C) Ask Victoria about the specific engineers who've disappeared—there might be a connection she's missed
 D) Suggest investigating the foundry itself—what if the signal is coming from inside this very building?
 
+
+---
+
+**> a**
+
+- `signal_triangulator.py` - 243 lines
