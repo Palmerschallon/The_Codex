@@ -432,10 +432,6 @@ def thinking_indicator(stop_event, genre="adventure"):
     phrase_index = 0
     cycles = 0
 
-    # Print initial lines (we'll overwrite these)
-    print()  # line 1: phrase
-    print()  # line 2: bar
-
     while not stop_event.is_set():
         # Build the bar
         bar = ""
@@ -447,11 +443,9 @@ def thinking_indicator(stop_event, genre="adventure"):
             else:
                 bar += empty
 
-        # Move cursor up 2 lines and print both lines
+        # Single line animation - use carriage return only
         current_phrase = phrases[phrase_index]
-        print(f'\033[2A', end='')  # move up 2 lines
-        print(f'\r    {dim}{current_phrase:<45}{reset}')
-        print(f'\r    {color}[{bar}]{reset}', end='', flush=True)
+        print(f'\r    {dim}{current_phrase:<35}{reset} {color}[{bar}]{reset}', end='', flush=True)
 
         position += direction
         if position >= bar_width - 1:
@@ -465,10 +459,9 @@ def thinking_indicator(stop_event, genre="adventure"):
 
         time.sleep(0.08)
 
-    # Clear both lines
-    print(f'\033[2A', end='')  # move up 2 lines
-    print(f'\r{" " * 55}')  # clear phrase line
-    print(f'\r{" " * 55}\r', end='', flush=True)  # clear bar line
+    # Clear the line and move to next
+    print(f'\r{" " * 70}\r', end='', flush=True)
+    print()
 
 
 def opening():

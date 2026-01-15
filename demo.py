@@ -42,7 +42,7 @@ def fake_input(prompt, response, delay=1.5):
     return response
 
 def thinking_animation(text, duration=3):
-    """Show the atmospheric loading bar"""
+    """Show a simple single-line loading animation"""
     color = '\033[35m'  # magenta for cyberpunk
     reset = '\033[0m'
     dim = '\033[2m'
@@ -50,9 +50,6 @@ def thinking_animation(text, duration=3):
     bar_width = 20
     position = 0
     direction = 1
-
-    print()
-    print()
 
     start_time = time.time()
     while time.time() - start_time < duration:
@@ -63,9 +60,8 @@ def thinking_animation(text, duration=3):
             else:
                 bar += "░"
 
-        print(f'\033[2A', end='')
-        print(f'    {dim}{text:<45}{reset}')
-        print(f'    {color}[{bar}]{reset}', end='', flush=True)
+        # Single line, just carriage return to overwrite
+        print(f'\r    {dim}{text:<30}{reset} {color}[{bar}]{reset}', end='', flush=True)
 
         position += direction
         if position >= bar_width - 1:
@@ -75,9 +71,9 @@ def thinking_animation(text, duration=3):
 
         time.sleep(0.08)
 
-    print(f'\033[2A', end='')
-    print(f'{" " * 55}')
-    print(f'{" " * 55}\r', end='', flush=True)
+    # Clear the line and move to next
+    print(f'\r{" " * 70}\r', end='', flush=True)
+    print()
 
 def artifact_box(filename, lines, path):
     """Show the artifact creation box"""
