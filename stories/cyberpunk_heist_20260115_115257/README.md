@@ -171,3 +171,9 @@ Ghost nods, his amber eye adjusting focus. "Surgical strikes, not carpet bombing
 
 "Exactly." Elena's tattoos pulse in steady, methodical patterns. "Instead of scanning everything, I'll build a targeted reconnaissance tool. Something that can identify the most promising archaeological sites within your collection, then focus our deep scans on specific targets."
 
+
+---
+
+**> try it our**
+
+- `targeted_probe.py` - 175 lines
