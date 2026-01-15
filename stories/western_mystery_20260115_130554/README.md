@@ -230,3 +230,48 @@ Ah, THIS is the key insight! You're absolutely right - we need a narrative abstr
 
 **What resonates with you?** Should we try a magic-heavy fantasy where "spellcrafting" = coding? Or a sci-fi where "programming ancient alien artifacts" drives the story?
 
+
+---
+
+**> it just has to be specific to the genre. and more frequent. peoplee should know things are growing around them with more code**
+
+Ah! Got it - **genre-appropriate abstractions that create MORE code MORE often**. Let me show you what this looks like:
+
+**WESTERN MYSTERY - Code Every Scene:**
+- Sarah "calibrates her telegraph apparatus" → builds signal analysis tools
+- You "adjust the frequency dials" → creates data processing scripts  
+- "Examining bullet trajectories" → ballistics calculation tools
+- "Mapping claim boundaries" → GIS/surveying utilities
+- "Analyzing ore samples" → chemical composition analyzers
+- "Tracking horse movements" → path analysis algorithms
+- "Decoding mining records" → data parsing tools
+
+**THE KEY:** Every investigation step = a new tool. Every character action = functional code.
+
+**CYBERPUNK:** 
+- "Hacking the mainframe" → network tools
+- "Writing viruses" → system utilities  
+- "Cracking encryption" → cryptography tools
+- "Tracing data flows" → monitoring scripts
+
+**FANTASY:**
+- "Enchanting a scrying crystal" → image processing tools
+- "Brewing detection potions" → chemical analysis scripts
+- "Weaving tracking spells" → data correlation algorithms
+- "Forging communication runes" → messaging protocols
+
+**SPACE HORROR:**
+- "Recalibrating sensors" → signal processing tools
+- "Analyzing alien DNA" → bioinformatics scripts
+- "Reprogramming ship systems" → automation tools
+
+The player should feel: "Wow, we've built an entire toolkit just by playing this story!"
+
+**Should I restart our western with this constant tool-building approach?** Every conversation, every clue, every problem → Sarah and the player build another piece of functional code?
+
+**What do you do?**
+A) Restart western with heavy tool-building integration
+B) Switch to cyberpunk for natural coding opportunities  
+C) Try fantasy with "spellcrafting" = programming
+D) Show me one scene done both ways (low-code vs high-code)
+
