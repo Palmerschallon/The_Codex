@@ -1,0 +1,116 @@
+{
+  "characters": {
+    "dr_elena_vasquez": {
+      "id": "dr_elena_vasquez",
+      "canonical_name": "Dr. Elena Vasquez",
+      "aliases": [
+        "Vasquez",
+        "Dr."
+      ],
+      "type": "protagonist",
+      "attributes": {
+        "occupation": "Quantum Communications Scientist",
+        "affiliation": "Meridian Research Station",
+        "skills": [
+          "signal analysis",
+          "quantum physics",
+          "programming"
+        ],
+        "traits": [
+          "determined",
+          "curious",
+          "rational"
+        ],
+        "description": "A brilliant scientist whose career has been devoted to searching for signs of intelligence in deep space."
+      },
+      "origin": {
+        "story_id": "cosmic_horror_20260115_075500",
+        "introduced_at": "2026-01-15T09:11:50.705380",
+        "introduction_context": "Chapter One - First protagonist encountered at Meridian Station"
+      },
+      "history": [
+        {
+          "story_id": "cosmic_horror_20260115_075500",
+          "role": "protagonist",
+          "events": [
+            {
+              "summary": "Discovered anomalous signals at Meridian Station",
+              "chapter": "Chapter One"
+            },
+            {
+              "summary": "Created signal analysis tool to decode transmissions",
+              "chapter": "Chapter One"
+            }
+          ],
+          "artifacts_created": []
+        }
+      ],
+      "relationships": {
+        "dr_marcus_chen": {
+          "type": "colleague",
+          "description": "Fellow scientist at Meridian Station"
+        }
+      },
+      "availability": {
+        "status": "active",
+        "last_seen_story": "cosmic_horror_20260115_075500",
+        "can_appear_in_genres": [
+          "cosmic horror",
+          "scifi",
+          "mystery"
+        ]
+      }
+    },
+    "dr_marcus_chen": {
+      "id": "dr_marcus_chen",
+      "canonical_name": "Dr. Marcus Chen",
+      "aliases": [
+        "Chen",
+        "Dr."
+      ],
+      "type": "supporting",
+      "attributes": {
+        "occupation": "Research Scientist",
+        "affiliation": "Meridian Research Station",
+        "skills": [
+          "data analysis",
+          "crisis management"
+        ],
+        "traits": [
+          "cautious",
+          "pragmatic",
+          "loyal"
+        ],
+        "description": "A practical scientist who values safety over discovery."
+      },
+      "origin": {
+        "story_id": "cosmic_horror_20260115_075500",
+        "introduced_at": "2026-01-15T09:11:50.705493",
+        "introduction_context": "Chapter One - Supporting character at Meridian Station"
+      },
+      "history": [
+        {
+          "story_id": "cosmic_horror_20260115_075500",
+          "role": "supporting",
+          "events": [],
+          "artifacts_created": []
+        }
+      ],
+      "relationships": {
+        "dr_elena_vasquez": {
+          "type": "colleague",
+          "description": "Works with Elena at the station"
+        }
+      },
+      "availability": {
+        "status": "active",
+        "last_seen_story": "cosmic_horror_20260115_075500",
+        "can_appear_in_genres": [
+          "cosmic horror",
+          "scifi",
+          "thriller"
+        ]
+      }
+    }
+  }
+}

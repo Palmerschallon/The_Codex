@@ -1,0 +1,56 @@
+{
+  "locations": {
+    "meridian_research_station": {
+      "id": "meridian_research_station",
+      "canonical_name": "Meridian Research Station",
+      "aliases": [],
+      "type": "facility",
+      "attributes": {
+        "description": "A remote research station perched on the edge of Antarctica, equipped with quantum processors and deep space monitoring arrays.",
+        "atmosphere": "isolated, cold, technological, foreboding",
+        "features": [
+          "Deep space monitoring arrays",
+          "Quantum processors",
+          "Failing heating system",
+          "Workstations",
+          "Living quarters"
+        ],
+        "hazards": [
+          "extreme cold",
+          "isolation",
+          "equipment malfunctions"
+        ],
+        "genre_affinity": [
+          "cosmic horror",
+          "scifi",
+          "thriller"
+        ]
+      },
+      "origin": {
+        "story_id": "cosmic_horror_20260115_075500",
+        "introduced_at": "2026-01-15T09:11:50.706196"
+      },
+      "history": [
+        {
+          "story_id": "cosmic_horror_20260115_075500",
+          "events": []
+        }
+      ],
+      "inhabitants": {
+        "permanent": [
+          "dr_elena_vasquez",
+          "dr_marcus_chen"
+        ],
+        "visitors": []
+      },
+      "connected_locations": [],
+      "artifacts_discovered_here": [
+        "deep_space_signal_analyzer"
+      ],
+      "availability": {
+        "status": "accessible",
+        "current_state": "normal"
+      }
+    }
+  }
+}

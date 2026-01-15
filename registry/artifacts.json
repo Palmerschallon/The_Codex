@@ -1,0 +1,58 @@
+{
+  "artifacts": {
+    "deep_space_signal_analyzer": {
+      "id": "deep_space_signal_analyzer",
+      "canonical_name": "Deep Space Signal Analyzer",
+      "type": "tool",
+      "category": "analysis",
+      "tags": [
+        "signal-processing",
+        "fft",
+        "astronomy",
+        "detection",
+        "anomaly"
+      ],
+      "description": "Analyzes deep space radio signals using FFT and anomaly detection to identify non-natural patterns",
+      "origin": {
+        "story_id": "cosmic_horror_20260115_075500",
+        "created_at": "2026-01-15T09:11:50.704771",
+        "created_by_character": null,
+        "narrative_context": "Dr. Elena Vasquez developed this tool to analyze deep space signals showing non-natural patterns at Meridian Station."
+      },
+      "technical": {
+        "language": "python",
+        "path": "stories/cosmic_horror_20260115_075500/signal_analyzer.py",
+        "entry_point": "DeepSpaceAnalyzer",
+        "dependencies": [
+          "numpy",
+          "scipy",
+          "matplotlib"
+        ],
+        "exports": [
+          "DeepSpaceAnalyzer",
+          "analyze_signal",
+          "batch_analyze"
+        ]
+      },
+      "usage": {
+        "import_statement": "from stories.cosmic_horror_20260115_075500.signal_analyzer import DeepSpaceAnalyzer",
+        "example": "# Use Deep Space Signal Analyzer - created in cosmic_horror_20260115_075500"
+      },
+      "cross_references": {
+        "used_in_stories": [
+          "cosmic_horror_20260115_075500"
+        ],
+        "related_artifacts": [],
+        "derived_from": null,
+        "inspired": []
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-01-15T09:11:50.704773",
+          "changelog": "Initial creation"
+        }
+      ]
+    }
+  }
+}

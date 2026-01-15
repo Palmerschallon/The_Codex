@@ -18,6 +18,14 @@ import json
 import subprocess
 from pathlib import Path
 
+# Registry system for shared universe
+try:
+    from lib.registry import CodexRegistry
+    from lib.query import RegistryQuery
+    HAS_REGISTRY = True
+except ImportError:
+    HAS_REGISTRY = False
+
 # Direct Anthropic API integration (no external dependencies beyond 'anthropic' package)
 try:
     import anthropic
@@ -99,6 +107,14 @@ def start_story_session(genre: str) -> str:
 
 """
     (story_path / "README.md").write_text(readme_content)
+
+    # Register story in the universe timeline
+    if HAS_REGISTRY:
+        try:
+            registry = CodexRegistry(CODEX_REPO_PATH)
+            registry.add_story_to_timeline(session_id, "main")
+        except Exception:
+            pass  # Registry is optional
 
     return session_id
 
@@ -679,6 +695,46 @@ def process_response(text: str, genre: str = "adventure") -> str:
             artifacts_created.append(('file', file_path, line_count))
             # Add to story README
             update_story_readme(Path(file_path).name, f"{line_count} lines")
+
+            # Register artifact in the universe
+            if HAS_REGISTRY and _current_story_session.get('id'):
+                try:
+                    registry = CodexRegistry(CODEX_REPO_PATH)
+                    # Infer artifact details from filename and content
+                    filename = Path(file_path).stem
+                    artifact_name = filename.replace('_', ' ').title()
+
+                    # Infer category from filename/content
+                    category = "general"
+                    if any(kw in filename.lower() for kw in ['scan', 'analyz', 'detect']):
+                        category = "analysis"
+                    elif any(kw in filename.lower() for kw in ['crypt', 'decod', 'encod', 'cipher']):
+                        category = "crypto"
+                    elif any(kw in filename.lower() for kw in ['net', 'socket', 'http', 'api']):
+                        category = "network"
+                    elif any(kw in filename.lower() for kw in ['hack', 'breach', 'ice']):
+                        category = "security"
+
+                    # Detect language from extension
+                    ext = Path(file_path).suffix.lower()
+                    lang_map = {'.py': 'python', '.js': 'javascript', '.ts': 'typescript', '.sh': 'shell'}
+                    language = lang_map.get(ext, 'python')
+
+                    # Get relative path for registry
+                    rel_path = file_path
+                    if CODEX_REPO_PATH in file_path:
+                        rel_path = file_path.replace(CODEX_REPO_PATH + '/', '')
+
+                    registry.register_artifact(
+                        name=artifact_name,
+                        story_id=_current_story_session['id'],
+                        file_path=rel_path,
+                        category=category,
+                        language=language,
+                        narrative_context=f"Created during {genre} story"
+                    )
+                except Exception:
+                    pass  # Registry is optional
         except Exception as e:
             artifacts_created.append(('error', f"Could not create {file_path}: {e}"))
 
@@ -764,6 +820,16 @@ def run_story(genre: str, mode: str, goal: str = None):
         goal_line=goal_line,
         story_path=story_path
     )
+
+    # Add universe context if registry is available
+    if HAS_REGISTRY:
+        try:
+            query = RegistryQuery(Path(CODEX_REPO_PATH) / "registry")
+            universe_context = query.build_prompt_context(genre=genre, max_items=5)
+            if universe_context:
+                system = system + "\n\n" + universe_context
+        except Exception:
+            pass  # Registry context is optional
 
     # Conversation history (we'll build full prompt each time)
     history = []

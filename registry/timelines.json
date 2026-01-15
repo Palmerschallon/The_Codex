@@ -1,0 +1,19 @@
+{
+  "timelines": {
+    "main": {
+      "id": "main",
+      "name": "Prime Timeline",
+      "branch": "main",
+      "description": "The canonical timeline of The Codex universe",
+      "stories": [
+        {
+          "story_id": "cosmic_horror_20260115_075500",
+          "sequence": 1,
+          "era": "present",
+          "added_at": "2026-01-15T09:11:50.704570"
+        }
+      ]
+    }
+  },
+  "branches": {}
+}
