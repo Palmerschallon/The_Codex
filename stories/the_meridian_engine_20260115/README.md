@@ -207,3 +207,17 @@ Victoria's device suddenly erupts in a cascade of clicking sounds. She's connect
 **> continue**
 
 - `network_mapper.py` - 194 lines
+# THE AERIAL FORTRESS
+
+The dirigible looms above like a mechanical leviathan, its brass-reinforced envelope reflecting the amber glow of the foundry fires below. But now that you look closer, you can see Victoria was right—the gondola beneath the gas bag isn't built for cargo or passengers. It's a fortress of copper mesh and transmission equipment, with rotating antenna arrays that sweep across the industrial district like mechanical eyes.
+
+Victoria's device reaches a fever pitch of activity. She's managed to create something extraordinary—a live network visualization that maps the signal traffic in real-time. The brass display shows dozens of nodes across the city, all connecting back to that floating command center.
+
+"Ray, look at this pattern," she whispers, her mechanical fingers tracing the connections on her improvised screen. "Every missing engineer worked at a facility that's now part of this network. They're not just intercepting communications—they're building something. A coordination system that could control every factory, every power station, every transportation hub in New Cascadia."
+
+A new sound cuts through the industrial symphony—the deep thrumming of the dirigible's engines spinning up. Steam vents from its ballast systems as it begins to rise from the mooring mast. Whatever operation you've stumbled into, your presence hasn't gone unnoticed.
+
+As Victoria works frantically to capture more data before the airship disappears, her signal analyzer begins detecting something new—encrypted transmissions flowing between the dirigible and ground stations throughout the city. She's building additional decryption modules on the fly, her mechanical arm moving with inhuman precision to wire new components into her expanding device.
+
+"They're activating something," she breathes. "All across the city. The network is going live."
+
