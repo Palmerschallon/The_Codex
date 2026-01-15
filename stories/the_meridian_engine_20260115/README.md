@@ -25,3 +25,9 @@ You are Detective Ray Kessler, formerly of the Metropolitan Police, now working 
 
 Victoria's mechanical fingers dance across a keyboard she's jury-rigged to her signal analyzer, a device that captures and decodes the various radio frequencies bouncing between the city's forest of transmission towers. She's been working on something that can not only intercept these mysterious signals but decode them in real-time.
 
+
+---
+
+**> please provide options to continue the story at every step. it is in your instructions**
+
+- `signal_analysis_results.txt` - 32 lines
