@@ -312,3 +312,33 @@ D) Question the other passengers about their destinations and cargo
 **> lets follow the telegraph lines**
 
 - `telegraph_monitor.py` - 199 lines
+The telegraph lines stretch into the desert like metal veins, their copper gleaming against the endless expanse of sage and alkali dust. You set off from the stalled train, following the strange trajectory that defies every rule of practical engineering – no telegraph company would string wire across this wasteland without settlements to connect.
+
+Professor Morse notices your departure and hurries to catch up, her boots crunching on the hardpan. "Wait – you see it too, don't you?" Her voice carries the excitement of someone who's found a kindred spirit in observation. "Those lines shouldn't exist. I've studied every telegraph map from here to San Francisco. There's nothing out there but desert and abandoned mining claims."
+
+The lines lead northwest, supported by makeshift poles that look hastily constructed – some are railroad ties driven into the ground, others are just weathered fence posts. Every quarter mile or so, you notice small wooden boxes attached to the lines, each one humming with a faint electrical sound that seems wrong in the vast silence of the desert.
+
+"Those junction boxes," Professor Morse murmurs, pulling out a brass instrument that looks like a stethoscope crossed with a compass. "They're not standard Western Union equipment. Someone's built a private network out here."
+
+She approaches one of the boxes and carefully opens its hinged cover. Inside, a maze of copper contacts, small gear mechanisms, and what appears to be a miniature difference engine no bigger than a pocket watch. The device clicks and whirs with mechanical precision, processing signals in ways that shouldn't be possible with 1878 technology.
+
+"Extraordinary," she breathes. "This isn't just relaying messages – it's analyzing them. Pattern recognition, frequency sorting..." She traces the mechanisms with her finger. "Someone's built an automated system to monitor and decode telegraph traffic across multiple networks."
+
+Following the lines further, you crest a low rise and see your destination: a sprawling complex hidden in a depression between hills. It looks like a mining operation, but wrong – too many buildings, too much machinery, and far too much wire. Smokestacks rise without the black coal smoke you'd expect, instead venting thin streams of what looks like steam or vapor.
+
+Most unsettling of all, the telegraph lines from at least six different directions converge on this hidden facility like spokes on a wheel. This isn't a mine – it's some kind of communication hub, intercepting and processing messages from across the territory.
+
+Professor Morse sets down her satchel and begins assembling what looks like a portable analysis station from her collection of brass instruments. "If we're going to understand what's happening down there, we need to tap into those lines safely. I can build us a passive monitoring system – something that can listen without being detected."
+
+**What do you do?**
+A) Help Professor Morse build her monitoring equipment to eavesdrop on the telegraph traffic
+B) Circle around to scout the facility from different angles before making any moves
+C) Approach the complex directly to confront whoever is running this operation
+D) Return to the train to warn the others and gather reinforcements
+
+User: A
+
+You kneel beside Professor Morse in the sparse shade of a Joshua tree, watching her skilled hands transform brass components into something that belongs more in the next century than this one. She works with the focused intensity of someone who sees the world in frequencies and algorithms.
+
+"Hand me that resonance coil," she says, not looking up from her assembly. Her fingers dance between copper contacts and delicate gear mechanisms. "My grandfather taught me that every electrical signal leaves traces – harmonics, timing patterns, unique signatures. We just need the right ears to hear them."
+
