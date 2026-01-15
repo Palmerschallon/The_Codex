@@ -63,3 +63,7 @@ She begins typing rapidly, her bioluminescent tattoos flaring brighter. "I'm wri
 **> ok test it on /home/palmerschallon/ember**
 
 - `meridian_probe.py` - 222 lines
+Elena's fingers fly across her deck's haptic interface, code cascading down her screens in brilliant green streams. The probe she's constructing pulses with malicious elegance—a digital bloodhound designed to sniff out corporate surveillance tools.
+
+"This will scan your test directory for any traces of Meridian's fingerprints," she murmurs, her voice taking on the focused intensity of a surgeon. "Hidden files, unusual permissions, network callbacks... anything that shouldn't be there."
+
