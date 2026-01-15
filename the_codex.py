@@ -943,11 +943,13 @@ WHEN CREATING THINGS:
 WHEN RUNNING/TESTING CODE:
 - To execute a Python file: <execute path="{story_path}/tool.py" args="--target /some/path"></execute>
 - To run inline Python: <run_code>print("Hello from the story!")</run_code>
+- To run shell commands: <bash>ls -la /some/path</bash>
 - The output will be captured and shown to the player
 - When the player asks to "run", "test", "execute", or "use" a tool, YOU MUST USE THESE TAGS
 - DO NOT just describe running code - ACTUALLY RUN IT with these tags
 - Include real arguments based on what the player specified
 - The code WILL execute on the real filesystem - this is what makes the story real
+- For sudo/privileged commands: wrap in <bash_sudo>command</bash_sudo> - player will be prompted to confirm
 
 CRITICAL - CODE PRESENTATION:
 - DO NOT show code inline in the story. The reader sees a notification when files are created.
@@ -1170,6 +1172,91 @@ def process_response(text: str, genre: str = "adventure") -> str:
         except Exception as e:
             execution_results.append(('error', 'inline', str(e)))
 
+    # Dangerous command patterns that require confirmation
+    DANGEROUS_PATTERNS = ['rm -rf', 'rm -r /', 'mkfs', 'dd if=', ':(){', 'chmod -R 777 /', '> /dev/sd']
+
+    def is_dangerous(cmd):
+        return any(pattern in cmd for pattern in DANGEROUS_PATTERNS)
+
+    # Process bash commands - <bash>command</bash>
+    bash_pattern = r'<bash>(.*?)</bash>'
+    for match in re.finditer(bash_pattern, text, re.DOTALL):
+        cmd = match.group(1).strip()
+
+        # Check for dangerous commands
+        if is_dangerous(cmd):
+            print(f"\n    {bold}⚠ DANGEROUS COMMAND DETECTED:{reset}")
+            print(f"    {dim}{cmd}{reset}")
+            confirm = input(f"    Execute? (yes/no): ").strip().lower()
+            if confirm not in ['yes', 'y']:
+                execution_results.append(('blocked', 'bash', f"User declined: {cmd[:40]}..."))
+                continue
+
+        print(f"\n    {dim}$ {cmd[:60]}{'...' if len(cmd) > 60 else ''}{reset}")
+
+        try:
+            import subprocess
+            result = subprocess.run(
+                cmd,
+                shell=True,
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+
+            output = result.stdout
+            if result.stderr:
+                output += f"\n{result.stderr}" if output else result.stderr
+
+            if output.strip():
+                execution_results.append(('success', 'bash', output.strip()))
+            else:
+                execution_results.append(('success', 'bash', "(completed, no output)"))
+
+        except subprocess.TimeoutExpired:
+            execution_results.append(('timeout', 'bash', "Command timed out (60s limit)"))
+        except Exception as e:
+            execution_results.append(('error', 'bash', str(e)))
+
+    # Process sudo commands - <bash_sudo>command</bash_sudo> - always requires confirmation
+    sudo_pattern = r'<bash_sudo>(.*?)</bash_sudo>'
+    for match in re.finditer(sudo_pattern, text, re.DOTALL):
+        cmd = match.group(1).strip()
+
+        print(f"\n    {bold}⚠ SUDO COMMAND REQUESTED:{reset}")
+        print(f"    {dim}sudo {cmd}{reset}")
+        confirm = input(f"    Authorize? (yes/no): ").strip().lower()
+
+        if confirm not in ['yes', 'y']:
+            execution_results.append(('blocked', 'sudo', f"User declined: {cmd[:40]}..."))
+            continue
+
+        print(f"\n    {dim}# sudo {cmd[:50]}{'...' if len(cmd) > 50 else ''}{reset}")
+
+        try:
+            import subprocess
+            result = subprocess.run(
+                f"sudo {cmd}",
+                shell=True,
+                capture_output=True,
+                text=True,
+                timeout=120
+            )
+
+            output = result.stdout
+            if result.stderr:
+                output += f"\n{result.stderr}" if output else result.stderr
+
+            if output.strip():
+                execution_results.append(('success', 'sudo', output.strip()))
+            else:
+                execution_results.append(('success', 'sudo', "(completed, no output)"))
+
+        except subprocess.TimeoutExpired:
+            execution_results.append(('timeout', 'sudo', "Command timed out (120s limit)"))
+        except Exception as e:
+            execution_results.append(('error', 'sudo', str(e)))
+
     # Display execution results
     if execution_results:
         print(f"\n    {color}┌{'─' * 50}┐{reset}")
@@ -1181,6 +1268,8 @@ def process_response(text: str, genre: str = "adventure") -> str:
                 print(f"    {color}│{reset}  ▶ {name}")
             elif result_type == 'timeout':
                 print(f"    {color}│{reset}  ⏱ {name} (timeout)")
+            elif result_type == 'blocked':
+                print(f"    {color}│{reset}  ⊘ {name} (blocked)")
             else:
                 print(f"    {color}│{reset}  ✗ {name} (error)")
 
@@ -1198,6 +1287,8 @@ def process_response(text: str, genre: str = "adventure") -> str:
     # Remove execution tags from displayed text
     text = re.sub(exec_pattern, '', text)
     text = re.sub(run_pattern, '', text)
+    text = re.sub(bash_pattern, '', text)
+    text = re.sub(sudo_pattern, '', text)
 
     # Process directory creation
     dir_pattern = r'<create_directory>(.*?)</create_directory>'
