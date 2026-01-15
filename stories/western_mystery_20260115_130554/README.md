@@ -63,3 +63,25 @@ The telegraph key's staccato rhythm fills the cramped office like an urgent hear
 
 The transmission continues for exactly three minutes and seventeen seconds before falling silent. Sarah sets down her pencil with a trembling hand and slides the paper toward you. The message is dense with alphanumeric clusters, but embedded within the chaos, you can almost glimpse fragments of meaning - coordinates, perhaps, or chemical formulations.
 
+
+---
+
+**> what do you think it is?**
+
+Sarah studies the fresh transcription, her finger tracing the mysterious patterns. "At first, I thought it might be mining coordinates - longitude and latitude references. The territory survey crews use similar notation." She points to a recurring sequence: **47N-112W-D394**. "But these numbers... they don't match any maps I know."
+
+She pulls out a worn geological survey from beneath the counter, spreading it across the wooden surface. "See here? Blackrock Mine sits at 46N-111W. These coordinates would put whatever's transmitting about fifteen miles deeper into the canyon system - territory that's never been properly surveyed."
+
+Her voice drops as she continues analyzing. "But look at these other sequences." She circles several groups of letters and numbers. "**CuSO4-1847**, **Fe2O3-2156**, **AgNO3-0923**. My father made me learn basic chemistry for assaying ore samples. These look like chemical compounds - copper sulfate, iron oxide, silver nitrate. But what are those numbers after each one?"
+
+The oil lamp gutters in a sudden draft, casting dancing shadows across the cryptic message. Outside, you hear the distant whinny of horses and the low murmur of voices from the saloon down the street.
+
+"There's something else troubling me," Sarah adds, her dark eyes meeting yours. "The timing. 9:17 PM was exactly when the cave-in happened at Blackrock. The one that killed twelve men and sealed the main shaft. That was two years ago this week."
+
+**What do you do?**
+
+A) Suggest creating a systematic analysis tool to decode the chemical and coordinate patterns
+B) Propose riding out to Blackrock Mine immediately to investigate the source
+C) Ask Sarah about the cave-in and what really happened two years ago
+D) Examine the telegraph equipment itself - something might be generating false signals
+
