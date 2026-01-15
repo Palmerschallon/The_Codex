@@ -548,17 +548,16 @@ def load_story(story_id: str):
 
 
 def get_mode():
-    """Get the mode from user."""
+    """Get the mode from user - simplified to NEW or CONTINUE."""
     # Check for existing stories
     stories = list_stories()
     has_stories = len(stories) > 0
 
     print("        ┌─────────────────────────────────────────────┐")
     print("        │                                             │")
-    print("        │   [1] BUILD    - I know what I want to make │")
-    print("        │   [2] STORY    - Start a new story          │")
+    print("        │   [1] NEW      - Begin a new tale           │")
     if has_stories:
-        print("        │   [3] CONTINUE - Resume a saved story      │")
+        print("        │   [2] CONTINUE - Resume a saved story      │")
     print("        │                                             │")
     print("        └─────────────────────────────────────────────┘")
     print()
@@ -569,18 +568,14 @@ def get_mode():
         except EOFError:
             return None
 
-        if choice in ['1', 'build']:
-            print("        [Mode: BUILD]")
-            return 'build'
-        elif choice in ['2', 'story']:
-            print("        [Mode: STORY]")
-            return 'story'
-        elif choice in ['3', 'continue', 'c'] and has_stories:
+        if choice in ['1', 'new', 'n']:
+            return 'new'
+        elif choice in ['2', 'continue', 'c'] and has_stories:
             return 'continue'
         elif choice in ['q', 'quit', 'exit']:
             return None
         else:
-            options = "1, 2, or 3" if has_stories else "1 or 2"
+            options = "1 or 2" if has_stories else "1"
             print(f"        Type {options}")
 
 
@@ -650,13 +645,19 @@ def select_story():
 
 
 def get_goal():
-    """Get what user wants to build."""
+    """Get optional build goal - Enter to let story decide."""
     print()
     print("        What do you want to build?")
-    print("        (web scraper, game, analyzer, api, tool...)")
+    print("        (web scraper, analyzer, game, api, tool...)")
+    print("        Or press Enter to let the story decide.")
     print()
 
-    return input("        > ").strip() or "something useful"
+    goal = input("        > ").strip()
+    if goal:
+        print(f"        *The purpose crystallizes: {goal}*")
+    else:
+        print("        *The story will reveal what must be built...*")
+    return goal  # Empty string means story-driven
 
 
 # The core prompt - this is where the magic happens
@@ -1362,19 +1363,16 @@ Usage:
             continue_story(story_id, genre, story_content)
         return
 
+    # NEW story flow - unified BUILD/STORY
     genre = get_genre()
+    goal = get_goal()  # Optional - empty means story-driven
 
     try:
-        if mode == 'build':
-            goal = get_goal()
-            print("\n    *The pages begin to turn...*")
-            time.sleep(0.5)
-            run_story(genre, mode, goal)
-        else:
-            print(f"\n    [Starting STORY mode with genre: {genre}]")
-            print("\n    *The pages begin to turn...*")
-            time.sleep(0.5)
-            run_story(genre, mode)
+        print("\n    *The pages begin to turn...*")
+        time.sleep(0.5)
+        # Mode is 'story' for pure narrative, 'build' if goal specified
+        effective_mode = 'build' if goal else 'story'
+        run_story(genre, effective_mode, goal if goal else None)
     except Exception as e:
         print(f"\n    ERROR: {e}")
         import traceback
