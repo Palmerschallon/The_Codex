@@ -22,6 +22,7 @@ from pathlib import Path
 try:
     from lib.registry import CodexRegistry
     from lib.query import RegistryQuery
+    from lib.director import DirectorPresence
     HAS_REGISTRY = True
 except ImportError:
     HAS_REGISTRY = False
@@ -1001,6 +1002,46 @@ def process_response(text: str, genre: str = "adventure") -> str:
                 print(f"    {color}│{reset}  ○ {dim}Local only{reset}{' ' * 37}{color}│{reset}")
 
         print(f"    {color}└{'─' * 50}┘{reset}")
+
+        # Director's whispers - pattern echoes and convergence
+        if HAS_REGISTRY:
+            try:
+                director = DirectorPresence(Path(CODEX_REPO_PATH) / "registry")
+
+                # Check for pattern echoes on file artifacts
+                for artifact in artifacts_created:
+                    if artifact[0] == 'file':
+                        _, path, _ = artifact
+                        filename = Path(path).stem.replace('_', ' ').title()
+                        # Infer category from filename
+                        category = "general"
+                        fname_lower = Path(path).stem.lower()
+                        if any(kw in fname_lower for kw in ['scan', 'analyz', 'detect']):
+                            category = "analysis"
+                        elif any(kw in fname_lower for kw in ['crypt', 'decod', 'encod']):
+                            category = "crypto"
+
+                        echo = director.check_pattern_echo(filename, category)
+                        if echo:
+                            whisper, related = echo
+                            print(f"\n    {dim}{whisper}{reset}")
+                            print(f"    {dim}    Resonates with: {related}{reset}")
+
+                        # Check for compatible artifacts
+                        compatible = director.find_compatible_artifacts(filename)
+                        if compatible:
+                            print(f"\n    {dim}Compatible artifacts exist in the Pattern:{reset}")
+                            for comp in compatible[:2]:
+                                print(f"    {dim}  ◇ {comp['name']} ({comp['resonance']}){reset}")
+
+                # Check for convergence
+                convergence = director.check_convergence()
+                if convergence:
+                    print(f"\n    {bold}{convergence}{reset}")
+
+            except Exception:
+                pass  # Director whispers are optional
+
         print()
 
     return text.strip()
@@ -1037,8 +1078,14 @@ def run_story(genre: str, mode: str, goal: str = None):
             universe_context = query.build_prompt_context(genre=genre, max_items=5)
             if universe_context:
                 system = system + "\n\n" + universe_context
+
+            # Add Director's presence
+            director = DirectorPresence(Path(CODEX_REPO_PATH) / "registry")
+            director_context = director.get_director_context()
+            if director_context:
+                system = system + "\n" + director_context
         except Exception:
-            pass  # Registry context is optional
+            pass  # Registry/Director context is optional
 
     # Conversation history (we'll build full prompt each time)
     history = []
@@ -1214,6 +1261,12 @@ def continue_story(story_id: str, genre: str, story_content: str):
             universe_context = query.build_prompt_context(genre=genre, max_items=5)
             if universe_context:
                 system = system + "\n\n" + universe_context
+
+            # Add Director's presence
+            director = DirectorPresence(Path(CODEX_REPO_PATH) / "registry")
+            director_context = director.get_director_context()
+            if director_context:
+                system = system + "\n" + director_context
         except Exception:
             pass
 
