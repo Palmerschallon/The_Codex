@@ -342,3 +342,9 @@ You kneel beside Professor Morse in the sparse shade of a Joshua tree, watching 
 
 "Hand me that resonance coil," she says, not looking up from her assembly. Her fingers dance between copper contacts and delicate gear mechanisms. "My grandfather taught me that every electrical signal leaves traces – harmonics, timing patterns, unique signatures. We just need the right ears to hear them."
 
+
+---
+
+**> continue**
+
+- `telegraph_monitor.py` - 238 lines
