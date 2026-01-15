@@ -1,0 +1,18 @@
+TRANSMISSION LOG - BLACKROCK ANOMALY
+Date: March 15, 1887
+Time: 8:42 PM (17 minutes early)
+Duration: 3m 17s
+
+Raw Intercept:
+7B4A 9C12 F8E0 3456 DEAD BEEF 1337 8080
+COPPER.VEINS.RUN.DEEP 
+4142 4344 BASE64== FFFFF000 
+GPS:32.5149N,110.8064W DEPTH:847FT
+Cu2S.CHALCOCITE.MATRIX.UNSTABLE
+END.TRANSMISSION.BLACKROCK.SEVEN.SEVEN
+
+Operator Notes: S. Hendricks
+- Signal strength 40% above normal
+- Frequency drift detected (+/- 15 Hz)
+- Electromagnetic interference in surrounding equipment
+- No known telegraph infrastructure at source coordinates
