@@ -180,20 +180,29 @@ def rename_story_with_title(title: str):
     # Create slug from title
     slug = title.lower().replace(' ', '_').replace('-', '_')
     slug = ''.join(c for c in slug if c.isalnum() or c == '_')
+    # Remove consecutive underscores
+    while '__' in slug:
+        slug = slug.replace('__', '_')
+    slug = slug.strip('_')
 
-    # Add timestamp to ensure uniqueness
-    timestamp = datetime.now().strftime("%Y%m%d")
+    # Use FULL timestamp (with time) to ensure uniqueness
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     new_session_id = f"{slug}_{timestamp}"
 
     new_path = old_path.parent / new_session_id
 
-    # Handle collision
+    # CRITICAL: Never overwrite existing directories
     if new_path.exists():
+        # Add counter to make unique
         counter = 1
         while new_path.exists():
             new_path = old_path.parent / f"{new_session_id}_{counter}"
             counter += 1
         new_session_id = new_path.name
+
+    # Safety check: don't rename if source and dest are somehow the same
+    if old_path == new_path:
+        return False
 
     # Move the directory
     try:
