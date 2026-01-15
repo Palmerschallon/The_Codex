@@ -29,3 +29,9 @@ Your blood runs cold. Every data runner knows the stories—Meridian Corp's most
 
 Elena's fingers dance across her deck, and suddenly the room fills with a three-dimensional projection of network pathways, security protocols, and data streams that pulse like arteries. "Three days ago, my contact inside Meridian sent me this before she disappeared."
 
+
+---
+
+**> what is it?**
+
+- `echo_fragment.py` - 124 lines
