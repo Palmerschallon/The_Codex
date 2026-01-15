@@ -143,3 +143,9 @@ Victoria's detector grows more frantic, its brass dials spinning wildly as you a
 
 "The signal's strongest here," Victoria whispers, her breath visible in the cooling air. She's been quietly enhancing her portable analyzer with additional tracking capabilities as you moved through the city.
 
+
+---
+
+**> The brass-fitted doors of the foundry slam open as you and Victoria burst into the coal-scented evening air. She clutches a portable version of her signal analyzer—a briefcase-sized contraption of brass tubes, copper wire antennas, and what appears to be a miniature version of her punch-card processing system.**
+
+- `frequency_tracker.py` - 323 lines
