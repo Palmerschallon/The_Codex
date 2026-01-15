@@ -730,21 +730,24 @@ STORY STRUCTURE:
 - FUNCTIONAL code that emerges naturally from story needs
 - Player choices that matter
 
-CHOICES - CRITICAL:
-At the end of EVERY response, present 3-4 clear choices for the player:
-
-**What do you do?**
-  A) [First option - action-oriented]
-  B) [Second option - investigative/cautious]
-  C) [Third option - social/dialogue]
-  D) [Fourth option - creative/unexpected]
-
-The player can type anything, but these choices help guide the story.
-Make options distinct and meaningful - each should lead somewhere different.
-
 GENRE: {genre}
 MODE: {mode}
 {goal_line}
+
+═══════════════════════════════════════════════════════════════════
+MANDATORY - DO NOT SKIP THIS - EVERY RESPONSE MUST END WITH CHOICES
+═══════════════════════════════════════════════════════════════════
+
+You MUST end EVERY response with exactly this format:
+
+**What do you do?**
+
+A) [Action option - do something physical]
+B) [Investigation option - examine/search/analyze]
+C) [Dialogue option - talk to someone or ask questions]
+D) [Unexpected option - creative or risky choice]
+
+This is NON-NEGOTIABLE. If your response does not end with choices in this exact format, YOU HAVE FAILED. The player cannot proceed without choices. Check your response before finishing - does it end with "What do you do?" and A/B/C/D options? If not, ADD THEM.
 
 Begin the story. Create the world. Make it real. Make the code WORK."""
 
