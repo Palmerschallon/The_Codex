@@ -23,3 +23,9 @@ She slides a crumpled piece of paper across the counter. Columns of seemingly ra
 
 "Started three days ago. Same time every night - 9:17 PM exactly. The patterns repeat, but they're too complex for any standard cipher I know. And there's no telegraph line to Blackrock anymore. That equipment was pulled out two years ago when the mine closed."
 
+
+---
+
+**> please always provide options to proceed**
+
+- `message_log.txt` - 25 lines

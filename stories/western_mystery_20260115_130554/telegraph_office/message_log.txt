@@ -1,17 +1,25 @@
-INTERCEPTED TRANSMISSIONS - BLACKROCK FREQUENCY
-Date: October 15, 1887
-Time: 21:17 Mountain Time
-Duration: 14 minutes, 33 seconds
+BLACKROCK TRANSMISSION LOG - S. HENDRICKS
+=====================================
 
-XQMR VHWK NLPD RTYU MNCV XWER BNML KJHG
-PPOI UYTQ ASDF GHJK ZXCV BNMA QWER TYUI
-MNCB VLKJ HGFD QWER TYUI XZMN CVBN MLKJ
+DAY 1 - January 12th, 9:17 PM
+QXJK MNBV TYUI OPQW ERTY ASDF ZXCV
+HJKL NBVC XZAQ WSER DTFG YHUJ IKOL
 
-[Pattern repeats with variations - 47 total sequences]
+DAY 2 - January 13th, 9:17 PM  
+MNBV TYUI QXJK OPQW ZXCV ERTY ASDF
+XZAQ HJKL NBVC WSER YHUJ DTFG IKOL
 
-Notes (S.H.):
-- Letters X, M, R appear 23% more frequently
-- Groups of 4, always 4
-- Signal strength inconsistent - source moving?
-- Background interference suggests electrical equipment
-- WHO IS SENDING THIS?
+DAY 3 - January 14th, 9:17 PM
+TYUI QXJK MNBV ZXCV OPQW ASDF ERTY
+NBVC XZAQ HJKL DTFG WSER IKOL YHUJ
+
+NOTES:
+- Messages always exactly 14 groups of 4 letters
+- Sequence appears to rotate/shift
+- No standard telegraph codes
+- Source: Unknown (Blackrock Mine line disconnected 1885)
+- Electric disturbances noted during transmission
+- Horse tracks seen near old relay station morning after each message
+
+Pattern analysis needed. Father's cipher books no help.
+Something is very wrong here.
