@@ -348,3 +348,15 @@ You kneel beside Professor Morse in the sparse shade of a Joshua tree, watching 
 **> continue**
 
 - `telegraph_monitor.py` - 238 lines
+Professor Morse's device takes shape like a mechanical spider – brass legs extending to grip the telegraph wire, copper filaments spreading out like a web to catch electrical whispers. She connects the final component with a satisfying click, then produces a set of specialized headphones from her satchel.
+
+"The beauty of passive monitoring," she explains, making minute adjustments to tiny dials, "is that we become invisible observers. Their signals will flow through our listener without disruption, but we'll capture every pulse, every coded message."
+
+She attaches the device to the nearest telegraph line with practiced precision. Immediately, the mechanism springs to life – gears turning, indicators flickering, and a soft rhythmic clicking that sounds almost like mechanical breathing. Professor Morse slips on the headphones, her expression shifting from curiosity to amazement, then to something approaching alarm.
+
+"Dear God," she whispers, scribbling frantically in a leather notebook. "The volume of traffic is staggering. Messages from Denver, Salt Lake City, San Francisco – all being routed through that facility. But they're not just relaying them..."
+
+Her pencil moves rapidly across the page, creating what looks like a combination of morse code transcription and mathematical analysis. She tears off the headphones and begins assembling a second device – this one designed to decode and categorize the intercepted signals.
+
+"They're performing real-time cryptanalysis on every message that passes through the territorial telegraph network," she says, her voice tight with the implications. "Stock transactions, military communications, personal telegrams – someone down there is reading everything and building patterns from the data."
+
