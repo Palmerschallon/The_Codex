@@ -187,3 +187,17 @@ Her mechanical fingers work with impossible speed, connecting new modules to her
 **> You follow her through the maze of industrial streets, past workers streaming out of factories, their faces blackened with coal dust and machine oil. Overhead, the skeletal framework of transmission towers creates a spider web against the darkening sky, while dirigibles drift between them like sleeping giants.**
 
 - `network_mapper.py` - 248 lines
+# THE SPIDER'S WEB
+
+You follow her through the maze of industrial streets, past workers streaming out of factories, their faces blackened with coal dust and machine oil. Overhead, the skeletal framework of transmission towers creates a spider web against the darkening sky, while dirigibles drift between them like sleeping giants.
+
+The portable analyzer in Victoria's brass-fitted hands grows increasingly agitated, its clockwork mechanisms whirring faster as you approach the heart of the transmission grid. The evening shift whistle echoes across the district—a deep, mournful sound that seems to trigger something in the device.
+
+"Ray!" Victoria's voice cuts through the industrial din. "The signals aren't just coordinating—they're responding to the shift changes. Someone's using the factory schedules as timing signals!"
+
+You duck beneath a low-hanging pneumatic tube as she leads you deeper into the maze. The workers flowing past you seem oblivious to the electronic conspiracy crackling overhead, but you notice something else—several of the men emerging from the Meridian Engine Works have the same distinctive brass badge pinned to their coveralls. A badge you recognize from the missing persons reports.
+
+Victoria's device suddenly erupts in a cascade of clicking sounds. She's connecting additional components as she moves, building what appears to be a real-time network mapper. Through the brass tubes and copper wiring, she's creating something that can trace the invisible web of signals back to its source.
+
+"There!" She points toward a massive dirigible docked at the Meridian Tower's mooring mast. Unlike the cargo airships drifting lazily overhead, this one bristles with transmission equipment. "That's not just transport—it's a mobile command center."
+
