@@ -227,3 +227,15 @@ As Victoria works frantically to capture more data before the airship disappears
 **> live to do what?**
 
 - `network_mapper.py` - 323 lines
+# THE MERIDIAN PROTOCOL
+
+Victoria's mechanical fingers freeze over her device as the encrypted transmissions suddenly resolve into readable text. Her brass-fitted screen flickers with decoded messages, and what you see makes your blood run cold.
+
+"MERIDIAN PROTOCOL INITIATED. PHASE ONE: INDUSTRIAL SEIZURE. ALL NODES REPORT READY."
+
+The dirigible climbs steadily into the smoke-hazed sky, but its signal footprint expands like a spider's web. Victoria's analyzer shows facility after facility across New Cascadia coming under the network's control—power stations, water pumps, railway switches, even the great pneumatic message system that connects the city's commercial district.
+
+"Ray, they're not just stealing industrial secrets," Victoria's voice carries a tremor you've never heard before. "They're seizing control of the entire city's infrastructure. Every missing engineer—they weren't kidnapped for ransom. They were conscripted to build this system from the inside."
+
+A new wave of transmissions floods her device, and she rapidly builds additional decryption modules to handle the increased traffic. Her mechanical arm moves with clockwork precision, connecting vacuum tubes and telegraph relays into an increasingly complex analytical engine.
+
