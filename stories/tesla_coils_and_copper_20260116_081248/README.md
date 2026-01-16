@@ -59,3 +59,25 @@ Elena's hand moved instinctively to the control panel of her resonance array. Th
 
 The way he said 'we' made it clear the invitation was as much a demand as an offer. Outside, the workshop's detection grid showed three more quantum signatures approaching the saloon. Marcus hadn't come alone.
 
+
+---
+
+**> options abcd to proceed please why are you ignoring the prompt?**
+
+Marcus's luminescent eyes tracked her hand's movement toward the control panel. "You're considering resistance," he said, tilting his head at an unnaturally precise angle. "The network calculates a 23.7% probability you'll attempt electromagnetic disruption. We've prepared countermeasures."
+
+From above came the sound of the saloon's music cutting off abruptly, followed by Sal's voice raised in confusion, then falling silent. The three quantum signatures on her detection grid were now inside the building, moving with coordinated precision through the upper floor.
+
+Elena's quantum resonance array hummed louder, its crystalline matrix beginning to glow as New Meridia's twin suns set beyond the canyon walls. The device represented months of work, her pathway to understanding how consciousness could be expanded rather than subsumed. But now it might be her only defense against whatever Marcus—and the intelligence behind his eyes—had become.
+
+"The miners in the deep shafts," Marcus said conversationally, "their neural interfaces make them ideal candidates. We could begin the integration tonight. By dawn, Copper Falls would be part of something magnificent—a node in a thinking network that spans star systems."
+
+The workshop's emergency protocols flickered to life as Elena's biosignature spiked with adrenaline. Hidden panels revealed additional equipment she'd hoped never to use: a prototype consciousness firewall she'd developed after those first disturbing signals at Meridian.
+
+**What do you do?**
+
+A) Activate the electromagnetic pulse and fight your way out of the workshop
+B) Pretend to cooperate while secretly analyzing the neural modifications Marcus has undergone  
+C) Try to reason with whatever remains of Marcus's original consciousness
+D) Activate the consciousness firewall and attempt to sever the network's connection to this world
+
