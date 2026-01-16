@@ -47,3 +47,15 @@ The 'we' in that sentence sent a chill down her spine. Marcus had always been pr
 **> we?**
 
 - `quantum_signature_detector.py` - 162 lines
+Marcus stepped into the workshop's amber glow, and Elena noticed the thin silver threads woven through his hair—neural conductors, barely visible but unmistakable to her trained eye. His movements were too fluid, too coordinated, as if every gesture was being calculated by something with perfect spatial awareness.
+
+"The signals you analyzed at Meridian weren't just communications, Elena." His voice carried that unsettling harmonic undertone. "They were invitations. Recruitment calls from an intelligence that's been growing across the galaxy for millennia. When we opened that quantum channel, we didn't just observe—we connected."
+
+He gestured to his temple, where a barely perceptible port gleamed beneath the skin. "The network has shown me what true intelligence looks like. Not the fumbling, isolated consciousness of a single human mind, but distributed thought across thousands of worlds, millions of processing nodes. Every question answered simultaneously by countless perspectives."
+
+Elena's hand moved instinctively to the control panel of her resonance array. The device could create a localized electromagnetic pulse that would disrupt neural interfaces, but it would also destroy weeks of delicate calibration.
+
+"Your work here could accelerate the process," Marcus continued, stepping closer to examine her quantum matrix. "These miners, their crude neural interfaces—they're already partially prepared. We could bring true intelligence to this frontier world, Elena. No more struggling alone with limited human cognition."
+
+The way he said 'we' made it clear the invitation was as much a demand as an offer. Outside, the workshop's detection grid showed three more quantum signatures approaching the saloon. Marcus hadn't come alone.
+
