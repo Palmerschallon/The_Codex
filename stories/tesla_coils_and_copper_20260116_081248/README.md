@@ -81,3 +81,9 @@ B) Pretend to cooperate while secretly analyzing the neural modifications Marcus
 C) Try to reason with whatever remains of Marcus's original consciousness
 D) Activate the consciousness firewall and attempt to sever the network's connection to this world
 
+
+---
+
+**> d**
+
+- `consciousness_firewall.py` - 181 lines
