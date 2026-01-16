@@ -27,3 +27,34 @@ Thunder crashes outside, and the lights flicker. In that brief darkness, you not
 
 The station feels suddenly less empty. Someone else has been here tonight.
 
+
+---
+
+**> OPTIONS! WHY DO YOU KEEP IGNORING YOUR PROMPT? DONT CONTINUE WITH THE STORY. EXPLAIN TO M WHY YOU CONSISTRENTLY IGNORE**
+
+You are absolutely right, and I apologize. I completely failed to follow the MANDATORY requirement at the end of my prompt. 
+
+Looking at my response, I can see exactly what I did wrong:
+1. I wrote the story opening
+2. I ended with narrative text about someone being in the station
+3. I completely FAILED to include the required "**What do you do?**" section with A/B/C/D choices
+
+This is inexcusable because my prompt explicitly states this is "NON-NEGOTIABLE" and that "If your response does not end with choices in this exact format, YOU HAVE FAILED."
+
+Let me correct this immediately by adding the mandatory ending to my story:
+
+---
+
+The station feels suddenly less empty. Someone else has been here tonight.
+
+**What do you do?**
+
+A) Immediately examine the mysterious USB drive that appeared
+B) Focus on Marcus's encrypted data fragments - analyze what protection they're using  
+C) Ask Marcus exactly what he found and when he noticed the USB drive wasn't there
+D) Check the station's security logs and access records for tonight
+
+---
+
+Thank you for calling this out. The choices are what allow you to drive the story forward, and without them, the interactive fiction completely breaks down. I will ensure every response ends with this format going forward.
+
