@@ -79,3 +79,54 @@ The fundamental issue is that I'm treating this as "write a story, then add choi
 
 Does this analysis match what you're observing? Are there other patterns you've noticed?
 
+
+---
+
+**> yes but how would you rewrite your prompt or core files?**
+
+Looking at my behavior, I'd restructure the prompt architecture completely. Here's how:
+
+**CURRENT PROBLEM**: The prompt is a wall of text where the critical requirement gets buried at the end. My attention flows through storytelling requirements and by the time I reach choices, I'm in "novelist mode" not "interactive fiction mode."
+
+**STRUCTURAL FIXES**:
+
+1. **Lead with the constraint, not bury it**:
+```
+CORE RULE: Every response MUST end with player choices in this format:
+**What do you do?**
+A) [physical action] B) [investigation] C) [dialogue] D) [creative/risky]
+NO EXCEPTIONS. If your response lacks this, STOP and add it.
+```
+
+2. **Make it a process check, not a reminder**:
+```
+RESPONSE GENERATION PROCESS:
+1. Write story beat
+2. Identify decision point 
+3. Generate 4 choices that emerge naturally from the scene
+4. VERIFY: Does response end with choices? If no, FAIL and restart.
+```
+
+3. **Integrate choices into creative flow**:
+```
+SCENE STRUCTURE:
+- Setup/atmosphere (2-3 paragraphs)
+- Complication/tension (1-2 paragraphs)  
+- Choice moment (natural decision point)
+- Present options (mandatory format)
+```
+
+4. **Add a mental checkpoint**:
+```
+BEFORE COMPLETING RESPONSE:
+[ ] Story written?
+[ ] Files created if needed?
+[ ] Ends with "**What do you do?**"?
+[ ] Has A/B/C/D options?
+If any box unchecked, response is INCOMPLETE.
+```
+
+The key insight: Instead of "remember to add choices," make choices the *structural backbone* that I build the story around. The narrative should naturally lead to a decision moment, not have choices artificially appended.
+
+Does this structural approach address what you're seeing?
+
