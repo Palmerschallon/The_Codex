@@ -13,3 +13,9 @@ At the edge of Copper Falls, the frontier town that had grown around the mining 
 
 Inside, past the mahogany bar where prospectors nursed their whiskey and argued over claim rights, a hidden workshop buzzed with activity. Dr. Elena Vasquez—though here she went simply by "Ellie"—had traveled far from her last posting at the Meridian Research Station. The quantum communications work that had led her to discover those unsettling deep space signals had also pointed her toward something else: patterns in the data that suggested intelligence could be... amplified.
 
+
+---
+
+**> amplified how?**
+
+- `neural_network_bridge.py` - 262 lines
