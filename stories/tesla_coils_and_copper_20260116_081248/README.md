@@ -41,3 +41,9 @@ The saloon doors creaked open above, and she heard Sal, the bartender, greet som
 
 The 'we' in that sentence sent a chill down her spine. Marcus had always been precise with his pronouns.
 
+
+---
+
+**> we?**
+
+- `quantum_signature_detector.py` - 162 lines
