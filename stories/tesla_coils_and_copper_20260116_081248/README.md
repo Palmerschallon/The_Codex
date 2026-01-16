@@ -87,3 +87,10 @@ D) Activate the consciousness firewall and attempt to sever the network's connec
 **> d**
 
 - `consciousness_firewall.py` - 181 lines
+Elena's fingers flew across the firewall's activation sequence, the prototype device emerging from its hidden alcove with a whisper of pneumatic hisses. The consciousness firewall—her most dangerous creation—began to spin up, its quantum isolation matrix casting dancing shadows across the workshop walls.
+
+"Fascinating," Marcus said, but his voice now carried multiple harmonics, as if several minds were speaking in unison. "You developed countermeasures. The network did not anticipate—"
+
+His words cut off as the firewall reached critical resonance. Elena felt the device's pull immediately—a strange tugging sensation at the edges of her thoughts, as if something was trying to quarantine her consciousness behind protective barriers. The workshop's quantum field fluctuated wildly, and Marcus staggered backward, his luminescent eyes flickering like dying stars.
+
+- `consciousness_firewall.py` - 212 lines
