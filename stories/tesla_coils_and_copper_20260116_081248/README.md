@@ -25,3 +25,9 @@ The revelation had come during those final nights at the Meridian Research Stati
 
 Here on New Meridia, she'd found the perfect testing ground. The planet's unique electromagnetic properties, caused by its twin-star system and mineral-rich core, created natural quantum entanglement fields. Combined with the frontier's isolation and the miners' hunger for technology that could find deeper veins of the precious crystalline ore, she could work without the bureaucratic oversight that had plagued her previous research.
 
+
+---
+
+**> rememebr to present options to proceed**
+
+- `quantum_network_analyzer.py` - 205 lines
